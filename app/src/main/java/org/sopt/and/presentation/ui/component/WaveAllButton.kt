@@ -23,7 +23,7 @@ import org.sopt.and.ui.theme.White
 fun WaveAllButton(
     buttonText: String,
     buttonColor: Color = BlueButton,
-    enableToClick: MutableState<Boolean> = mutableStateOf(value = false),
+    enableToClick: MutableState<Boolean> = mutableStateOf(value = true),
     onClickButton: () -> Unit
 ) {
     Button(
