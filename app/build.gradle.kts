@@ -60,6 +60,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.kotlinx.coroutines.core)
+
     // Hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
