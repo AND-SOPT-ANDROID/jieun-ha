@@ -30,6 +30,8 @@
     <string name="login_find_id">아이디 찾기</string>
     <string name="login_find_password">비밀번호 재설정</string>
     <string name="login_social_account">또는 다른 서비스 계정으로 로그인</string>
+    <string name="login_fail">올바른 정보를 입력해주세요.</string>
+    <string name="login_success">로그인 성공!</string>
     
     <!-- my -->
     <string name="my_nickname">%s님</string>
