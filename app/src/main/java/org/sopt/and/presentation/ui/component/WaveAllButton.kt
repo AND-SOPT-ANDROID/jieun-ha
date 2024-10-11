@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.BlueButton
-import org.sopt.and.ui.theme.Gray100
+import org.sopt.and.ui.theme.Gray200
 import org.sopt.and.ui.theme.White
 
 @Composable
@@ -36,7 +36,7 @@ fun WaveAllButton(
             containerColor = buttonColor,
             contentColor = White,
             disabledContentColor = White,
-            disabledContainerColor = Gray100
+            disabledContainerColor = Gray200
         )
     ) {
         Text(text = buttonText)
