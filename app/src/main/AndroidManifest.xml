@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ANDANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.auth.LoginActivity"
+            android:name=".presentation.ui.auth.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.ui.auth.RegisterActivity"
+            android:name=".presentation.ui.auth.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.my.MyActivity"
