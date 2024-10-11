@@ -1,10 +1,12 @@
 package org.sopt.and.presentation.ui.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,15 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.R
 import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
 import org.sopt.and.presentation.ui.component.WaveAllTopBar
@@ -39,24 +41,30 @@ import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
 import org.sopt.and.ui.theme.White
+import org.sopt.and.util.showToast
+import timber.log.Timber
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 
+@AndroidEntryPoint
 class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val registerViewModel: RegisterViewModel by viewModels()
+
         setContent {
             ANDANDROIDTheme {
-                LoginScreen()
+                RegisterScreen(viewModel = registerViewModel, context = LocalContext.current)
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreen() {
-    var userEmail by remember { mutableStateOf("") }
-    var userPassword by remember { mutableStateOf("") }
-    val showPassword = remember { mutableStateOf(false) }
+fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
+    val registerState by viewModel.registerState
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -80,15 +88,15 @@ fun RegisterScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         WaveTextField(
             placeholder = stringResource(R.string.register_email_hint),
-            value = userEmail,
-            onValueChange = { userEmail = it }
+            value = registerState.email,
+            onValueChange = { viewModel.onEvent(RegisterEvent.EmailChanged(it)) }
         )
         TextWithStartIcon(stringResource(R.string.register_email_information))
         WaveTextFieldWithShowAndHide(
             placeholder = stringResource(R.string.register_password),
-            value = userPassword,
-            onValueChange = { userPassword = it },
-            showPassword = showPassword
+            value = registerState.password,
+            onValueChange = { viewModel.onEvent(RegisterEvent.PasswordChanged(it)) },
+            showPassword = remember { mutableStateOf(registerState.showPassword) }
         )
         TextWithStartIcon(stringResource(R.string.register_password_information))
         TextWithHorizontalDivider(
@@ -97,7 +105,7 @@ fun RegisterScreen() {
         )
         SocialLoginRow()
     }
-    RegisterCompleteButton()
+    RegisterCompleteButton(viewModel = viewModel, context = context)
 }
 
 @Composable
@@ -168,11 +176,11 @@ fun SocialLoginRow() {
 }
 
 @Composable
-fun RegisterCompleteButton() {
-    Column (
+fun RegisterCompleteButton(viewModel: RegisterViewModel, context: Context) {
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom
-    ){
+    ) {
         Text(
             text = stringResource(R.string.register_button),
             textAlign = TextAlign.Center,
@@ -180,16 +188,18 @@ fun RegisterCompleteButton() {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Gray100)
-                .clickable { }
+                .clickable {
+                    Timber.tag("[회원가입]").d("회원가입 버튼 클릭")
+                    if (viewModel.checkIsValidEmail() && viewModel.checkIsValidPassword()) {
+                        viewModel.apply {
+                            setLocalUserEmail()
+                            setLocalUserPassword()
+                        }
+                    } else {
+                        context.apply { showToast(getString(R.string.register_toast)) }
+                    }
+                }
                 .padding(vertical = 15.dp)
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RegisterPreview() {
-    ANDANDROIDTheme {
-        RegisterScreen()
     }
 }

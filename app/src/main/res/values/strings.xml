@@ -20,6 +20,7 @@
     <string name="register_password_information">비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 혼용하여 입력해 주세요.</string>
     <string name="register_social_account">또는 다른 서비스 계정으로 가입</string>
     <string name="register_button">Wavve 회원가입</string>
+    <string name="register_toast">올바른 이메일과 비밀번호를 입력해주세요.</string>
 
     <!-- login -->
     <string name="login_title">Wavve</string>
