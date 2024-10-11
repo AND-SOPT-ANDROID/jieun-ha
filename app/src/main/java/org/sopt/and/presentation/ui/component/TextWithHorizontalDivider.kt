@@ -11,9 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
-import org.sopt.and.ui.theme.Gray300
+import org.sopt.and.ui.theme.GrayBlack
 
 @Composable
 fun TextWithHorizontalDivider(
@@ -32,10 +33,11 @@ fun TextWithHorizontalDivider(
         Text(
             text = dividerText,
             modifier = Modifier
-                .background(Gray300)
+                .background(GrayBlack)
                 .align(Alignment.Center)
                 .padding(horizontal = 5.dp),
-            color = Gray100
+            color = Gray100,
+            fontSize = 12.sp
         )
     }
 }

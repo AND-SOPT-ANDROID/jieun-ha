@@ -23,13 +23,13 @@ import org.sopt.and.ui.theme.White
 fun WaveAllButton(
     buttonText: String,
     buttonColor: Color = BlueButton,
-    enableToClick: MutableState<Boolean>,
+    enableToClick: MutableState<Boolean> = mutableStateOf(value = false),
     onClickButton: () -> Unit
 ) {
     Button(
         modifier = Modifier
             .fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 40.dp),
+        contentPadding = PaddingValues(horizontal = 40.dp, vertical = 15.dp),
         enabled = enableToClick.value,
         onClick = { onClickButton() },
         colors = ButtonDefaults.buttonColors(

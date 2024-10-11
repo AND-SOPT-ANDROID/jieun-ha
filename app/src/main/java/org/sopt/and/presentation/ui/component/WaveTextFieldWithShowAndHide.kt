@@ -50,8 +50,8 @@ fun WaveTextFieldWithShowAndHide(
             Text(
                 text = stringResource(id = if (!showPassword.value) R.string.password_show else R.string.password_hide),
                 modifier = modifier
-                    .clickable { showPassword.value = !showPassword.value }
-                    .padding(horizontal = 10.dp),
+                    .padding(horizontal = 10.dp)
+                    .clickable { showPassword.value = !showPassword.value },
                 color = White
             )
         },
