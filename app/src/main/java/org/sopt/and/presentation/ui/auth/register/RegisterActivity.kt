@@ -20,9 +20,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.R
-import org.sopt.and.presentation.ui.auth.RegisterEvent
 import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
 import org.sopt.and.presentation.ui.component.WaveAllTopBar
 import org.sopt.and.presentation.ui.component.WaveTextField
@@ -63,7 +61,7 @@ class RegisterActivity : ComponentActivity() {
 
 @Composable
 fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
-    val registerState by viewModel.registerState
+    val registerState by viewModel.uiState.collectAsState()
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -88,14 +86,15 @@ fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
         WaveTextField(
             placeholder = stringResource(R.string.register_email_hint),
             value = registerState.email,
-            onValueChange = { viewModel.onEvent(RegisterEvent.EmailChanged(it)) }
+            onValueChange = { viewModel.setEvent(RegisterContract.RegisterEvent.EmailChanged(it)) }
         )
         TextWithStartIcon(stringResource(R.string.register_email_information))
         WaveTextFieldWithShowAndHide(
             placeholder = stringResource(R.string.register_password),
             value = registerState.password,
-            onValueChange = { viewModel.onEvent(RegisterEvent.PasswordChanged(it)) },
-            showPassword = remember { mutableStateOf(registerState.showPassword) }
+            onValueChange = { viewModel.setEvent(RegisterContract.RegisterEvent.PasswordChanged(it)) },
+            showPassword = registerState.showPassword,
+            changePasswordVisibility = { viewModel.setEvent(RegisterContract.RegisterEvent.PasswordVisibilityChanged) }
         )
         TextWithStartIcon(stringResource(R.string.register_password_information))
         TextWithHorizontalDivider(
@@ -198,6 +197,13 @@ fun RegisterCompleteButton(viewModel: RegisterViewModel, context: Context) {
                         }
                         (context as? Activity)?.finish()
                     } else {
+                        viewModel.setEffect(
+                            RegisterContract.RegisterEffect.ShowToast(
+                                context.getString(
+                                    R.string.register_toast
+                                )
+                            )
+                        )
                         context.apply { showToast(getString(R.string.register_toast)) }
                     }
                 }

@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,7 +31,8 @@ fun WaveTextFieldWithShowAndHide(
     placeholder: String,
     value: String,
     onValueChange: (String) -> Unit = { _ -> },
-    showPassword: MutableState<Boolean> = mutableStateOf(value = false)
+    showPassword: Boolean = false,
+    changePasswordVisibility: () -> Unit
 ) {
     TextField(
         value = value,
@@ -48,14 +48,14 @@ fun WaveTextFieldWithShowAndHide(
         },
         trailingIcon = {
             Text(
-                text = stringResource(id = if (!showPassword.value) R.string.password_show else R.string.password_hide),
+                text = stringResource(id = if (!showPassword) R.string.password_show else R.string.password_hide),
                 modifier = modifier
                     .padding(horizontal = 10.dp)
-                    .clickable { showPassword.value = !showPassword.value },
+                    .clickable { changePasswordVisibility() },
                 color = White
             )
         },
-        visualTransformation = if (!showPassword.value) PasswordVisualTransformation() else VisualTransformation.None,
+        visualTransformation = if (!showPassword) PasswordVisualTransformation() else VisualTransformation.None,
         singleLine = true,
         shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.colors(
@@ -75,13 +75,13 @@ fun WaveTextFieldWithShowAndHide(
 fun WaveTextFieldWithShowAndHidePreview() {
     ANDANDROIDTheme {
         var inputText by remember { mutableStateOf("") }
-        val showPassword = remember { mutableStateOf(false) }
 
         WaveTextFieldWithShowAndHide(
             placeholder = "힌트",
             value = inputText,
             onValueChange = { newTextValue -> inputText = newTextValue },
-            showPassword = showPassword
+            showPassword = false,
+            changePasswordVisibility = { }
         )
     }
 }
