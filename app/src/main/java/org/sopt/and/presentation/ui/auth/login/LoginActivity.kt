@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.ui.auth
+package org.sopt.and.presentation.ui.auth.login
 
 import android.content.Context
 import android.content.Intent
@@ -32,6 +32,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.sopt.and.R
+import org.sopt.and.presentation.ui.auth.register.RegisterActivity
+import org.sopt.and.presentation.ui.auth.register.SocialLoginRow
 import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
 import org.sopt.and.presentation.ui.component.ThreeTextWithVerticalDivider
 import org.sopt.and.presentation.ui.component.WaveAllButton

@@ -1,8 +1,7 @@
-package org.sopt.and.presentation.ui.auth
+package org.sopt.and.presentation.ui.auth.register
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,11 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.R
+import org.sopt.and.presentation.ui.auth.RegisterEvent
 import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
 import org.sopt.and.presentation.ui.component.WaveAllTopBar
 import org.sopt.and.presentation.ui.component.WaveTextField
 import org.sopt.and.presentation.ui.component.WaveTextFieldWithShowAndHide
-import org.sopt.and.presentation.ui.my.MyActivity
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
