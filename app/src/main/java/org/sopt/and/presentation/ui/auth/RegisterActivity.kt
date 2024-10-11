@@ -1,8 +1,9 @@
 package org.sopt.and.presentation.ui.auth
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -37,14 +38,13 @@ import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
 import org.sopt.and.presentation.ui.component.WaveAllTopBar
 import org.sopt.and.presentation.ui.component.WaveTextField
 import org.sopt.and.presentation.ui.component.WaveTextFieldWithShowAndHide
+import org.sopt.and.presentation.ui.my.MyActivity
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
 import org.sopt.and.ui.theme.White
 import org.sopt.and.util.showToast
 import timber.log.Timber
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.*
 
 @AndroidEntryPoint
 class RegisterActivity : ComponentActivity() {
@@ -77,7 +77,7 @@ fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
             title = stringResource(R.string.register),
             position = Alignment.CenterEnd,
             icon = R.drawable.ic_close_btn_24,
-            onIconClick = { Log.d("클릭", "안녕") }
+            onIconClick = { (context as? Activity)?.finish() }
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
@@ -189,12 +189,15 @@ fun RegisterCompleteButton(viewModel: RegisterViewModel, context: Context) {
                 .fillMaxWidth()
                 .background(Gray100)
                 .clickable {
-                    Timber.tag("[회원가입]").d("회원가입 버튼 클릭")
+                    Timber
+                        .tag("[회원가입]")
+                        .d("회원가입 버튼 클릭")
                     if (viewModel.checkIsValidEmail() && viewModel.checkIsValidPassword()) {
                         viewModel.apply {
                             setLocalUserEmail()
                             setLocalUserPassword()
                         }
+                        (context as? Activity)?.finish()
                     } else {
                         context.apply { showToast(getString(R.string.register_toast)) }
                     }
