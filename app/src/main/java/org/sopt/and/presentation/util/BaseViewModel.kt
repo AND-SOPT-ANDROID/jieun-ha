@@ -48,6 +48,6 @@ abstract class BaseViewModel<Event: UiEvent, State: UiState, Effect: UiEffect> :
         viewModelScope.launch { uiEvent.collect{ event -> handleEvent(event) } }
     }
 
-    protected abstract suspend fun handleEvent(event: UiEvent)
-    protected abstract fun handleEffect(effect: UiEffect)
+    protected abstract suspend fun handleEvent(event: Event)
+    protected abstract fun handleEffect(effect: Effect)
 }
