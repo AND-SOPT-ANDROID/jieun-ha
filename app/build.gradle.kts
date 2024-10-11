@@ -63,4 +63,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    // Timber
+    implementation(libs.timber)
 }
