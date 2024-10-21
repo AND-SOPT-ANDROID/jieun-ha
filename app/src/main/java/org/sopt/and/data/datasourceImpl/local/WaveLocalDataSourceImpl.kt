@@ -14,9 +14,6 @@ class WaveLocalDataSourceImpl @Inject constructor(
     private val pref: SharedPreferences =
         context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 
-    override val sharedPreferences: SharedPreferences
-        get() = pref
-
     override var isLogin: Boolean
         get() = pref.getBoolean(AUTO_LOGIN, false)
         set(value) = pref.edit { putBoolean(AUTO_LOGIN, value) }
