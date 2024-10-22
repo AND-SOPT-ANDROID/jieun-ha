@@ -100,7 +100,6 @@ class RegisterActivity : ComponentActivity() {
                             registerViewModel.setEvent(
                                 RegisterContract.RegisterEvent.OnRegisterBtnClicked(
                                     message = applicationContext.getString(R.string.register_toast),
-                                    finishActivity = { finish() }
                                 )
                             )
                         },

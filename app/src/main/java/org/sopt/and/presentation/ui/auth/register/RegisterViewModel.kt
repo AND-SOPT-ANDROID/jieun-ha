@@ -36,7 +36,6 @@ class RegisterViewModel @Inject constructor(
             is RegisterContract.RegisterEvent.PasswordVisibilityChanged -> {
                 setState(currentUiState.copy(showPassword = !currentUiState.showPassword))
                 Timber.tag("[회원가입]").d("showPassword 변경 : ${currentUiState.showPassword}")
-
             }
 
             is RegisterContract.RegisterEvent.OnRegisterBtnClicked -> {

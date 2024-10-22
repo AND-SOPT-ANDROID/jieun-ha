@@ -9,7 +9,7 @@ class RegisterContract {
         data class EmailChanged(val email: String) : RegisterEvent()
         data class PasswordChanged(val password: String) : RegisterEvent()
         data object PasswordVisibilityChanged : RegisterEvent()
-        data class OnRegisterBtnClicked(val message: String, val finishActivity: () -> Unit) : RegisterEvent()
+        data class OnRegisterBtnClicked(val message: String) : RegisterEvent()
     }
 
     enum class RegisterStatus {
