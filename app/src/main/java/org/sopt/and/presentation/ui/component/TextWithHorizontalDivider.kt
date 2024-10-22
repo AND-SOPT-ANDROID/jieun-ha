@@ -18,8 +18,8 @@ import org.sopt.and.ui.theme.GrayBlack
 
 @Composable
 fun TextWithHorizontalDivider(
+    dividerText: String,
     modifier: Modifier = Modifier,
-    dividerText: String
 ) {
     Box(
         modifier = modifier
@@ -28,7 +28,8 @@ fun TextWithHorizontalDivider(
         HorizontalDivider(
             modifier = Modifier
                 .align(alignment = Alignment.Center),
-            color = Gray100, thickness = 2.dp
+            color = Gray100,
+            thickness = 2.dp
         )
         Text(
             text = dividerText,

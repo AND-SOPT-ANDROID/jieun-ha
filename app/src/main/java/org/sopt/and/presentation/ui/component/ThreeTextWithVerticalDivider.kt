@@ -1,6 +1,5 @@
 package org.sopt.and.presentation.ui.component
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
+import timber.log.Timber
 
 @Composable
 fun ThreeTextWithVerticalDivider(
@@ -75,7 +75,7 @@ fun ThreeTextWithVerticalDividerPreview() {
             dividerLeftText = "아이디 찾기",
             dividerCenterText = "비밀번호 재설정",
             dividerRightText = "회원가입",
-            onDividerRightTextClick = { Log.d("클릭", "클릭") }
+            onDividerRightTextClick = { Timber.tag("클릭").d("클릭") }
         )
     }
 }
