@@ -137,19 +137,25 @@ fun RegisterScreen(
             icon = R.drawable.ic_close_btn_24,
             onIconClick = { onBackBtnClick() }
         )
+
         Spacer(modifier = Modifier.height(20.dp))
+
         Text(
             text = stringResource(R.string.register_title),
             fontSize = 20.sp,
             color = White
         )
+
         Spacer(modifier = Modifier.height(20.dp))
+
         WaveTextField(
             placeholder = stringResource(R.string.register_email_hint),
             value = email,
             onValueChange = { onEmailChange(it) }
         )
+
         TextWithStartIcon(stringResource(R.string.register_email_information))
+
         WaveTextFieldWithShowAndHide(
             placeholder = stringResource(R.string.register_password),
             value = password,
@@ -157,14 +163,18 @@ fun RegisterScreen(
             showPassword = showPassword,
             changePasswordVisibility = { onPasswordVisibilityChange() }
         )
+
         TextWithStartIcon(stringResource(R.string.register_password_information))
+
         TextWithHorizontalDivider(
             modifier = Modifier.height(70.dp),
             dividerText = stringResource(R.string.login_social_account)
         )
+
         SocialLoginRow()
     }
-    RegisterCompleteButton(onClick = { onRegisterBtnClick() })
+
+    RegisterCompleteButton(onClick = { onRegisterBtnClick() }, modifier = modifier)
 }
 
 @Composable
@@ -201,24 +211,28 @@ fun SocialLoginRow() {
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
+
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
+
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
+
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
+
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
@@ -226,6 +240,7 @@ fun SocialLoginRow() {
             tint = Gray100
         )
     }
+
     Text(
         text = stringResource(R.string.social_account_information),
         modifier = Modifier.padding(vertical = 20.dp),
@@ -235,9 +250,9 @@ fun SocialLoginRow() {
 }
 
 @Composable
-fun RegisterCompleteButton(onClick: () -> Unit) {
+fun RegisterCompleteButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom
     ) {
         Text(
