@@ -1,7 +1,5 @@
 package org.sopt.and.presentation.ui.auth.register
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,16 +16,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,6 @@ import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
 import org.sopt.and.ui.theme.White
 import org.sopt.and.util.showToast
-import timber.log.Timber
 
 @AndroidEntryPoint
 class RegisterActivity : ComponentActivity() {
@@ -53,19 +53,80 @@ class RegisterActivity : ComponentActivity() {
 
         setContent {
             ANDANDROIDTheme {
-                RegisterScreen(viewModel = registerViewModel, context = LocalContext.current)
+                val registerState by registerViewModel.uiState.collectAsState()
+                val registerEffect = registerViewModel.uiEffect
+
+                LaunchedEffect(registerEffect) {
+                    registerEffect.collect { registerEffect ->
+                        when (registerEffect) {
+                            is RegisterContract.RegisterEffect.ShowToast -> {
+                                applicationContext.showToast(registerEffect.message)
+                            }
+                        }
+                    }
+                }
+
+                LaunchedEffect(registerState.registerStatus) {
+                    if (registerState.registerStatus == RegisterContract.RegisterStatus.Success) {
+                        finish()
+                    }
+                }
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    RegisterScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        email = registerState.email,
+                        password = registerState.password,
+                        showPassword = registerState.showPassword,
+                        onEmailChange = {
+                            registerViewModel.setEvent(
+                                RegisterContract.RegisterEvent.EmailChanged(it)
+                            )
+                        },
+                        onPasswordChange = {
+                            registerViewModel.setEvent(
+                                RegisterContract.RegisterEvent.PasswordChanged(it)
+                            )
+                        },
+                        onPasswordVisibilityChange = {
+                            registerViewModel.setEvent(
+                                RegisterContract.RegisterEvent.PasswordVisibilityChanged
+                            )
+                        },
+                        onBackBtnClick = { finish() },
+                        onRegisterBtnClick = {
+                            registerViewModel.setEvent(
+                                RegisterContract.RegisterEvent.OnRegisterBtnClicked(
+                                    message = applicationContext.getString(R.string.register_toast),
+                                    finishActivity = { finish() }
+                                )
+                            )
+                        },
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
-    val registerState by viewModel.uiState.collectAsState()
+fun RegisterScreen(
+    modifier: Modifier = Modifier,
+    email: String,
+    password: String,
+    showPassword: Boolean,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordVisibilityChange: () -> Unit,
+    onBackBtnClick: () -> Unit,
+    onRegisterBtnClick: () -> Unit,
+) {
 
     Column(
         verticalArrangement = Arrangement.Top,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(GrayBlack)
             .padding(horizontal = 15.dp),
@@ -74,7 +135,7 @@ fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
             title = stringResource(R.string.register),
             position = Alignment.CenterEnd,
             icon = R.drawable.ic_close_btn_24,
-            onIconClick = { (context as? Activity)?.finish() }
+            onIconClick = { onBackBtnClick() }
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
@@ -85,16 +146,16 @@ fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
         Spacer(modifier = Modifier.height(20.dp))
         WaveTextField(
             placeholder = stringResource(R.string.register_email_hint),
-            value = registerState.email,
-            onValueChange = { viewModel.setEvent(RegisterContract.RegisterEvent.EmailChanged(it)) }
+            value = email,
+            onValueChange = { onEmailChange(it) }
         )
         TextWithStartIcon(stringResource(R.string.register_email_information))
         WaveTextFieldWithShowAndHide(
             placeholder = stringResource(R.string.register_password),
-            value = registerState.password,
-            onValueChange = { viewModel.setEvent(RegisterContract.RegisterEvent.PasswordChanged(it)) },
-            showPassword = registerState.showPassword,
-            changePasswordVisibility = { viewModel.setEvent(RegisterContract.RegisterEvent.PasswordVisibilityChanged) }
+            value = password,
+            onValueChange = { onPasswordChange(it) },
+            showPassword = showPassword,
+            changePasswordVisibility = { onPasswordVisibilityChange() }
         )
         TextWithStartIcon(stringResource(R.string.register_password_information))
         TextWithHorizontalDivider(
@@ -103,7 +164,7 @@ fun RegisterScreen(viewModel: RegisterViewModel, context: Context) {
         )
         SocialLoginRow()
     }
-    RegisterCompleteButton(viewModel = viewModel, context = context)
+    RegisterCompleteButton(onClick = { onRegisterBtnClick() })
 }
 
 @Composable
@@ -114,7 +175,7 @@ fun TextWithStartIcon(information: String) {
             .padding(vertical = 4.dp)
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_support_24),
             contentDescription = null,
             tint = Gray100
         )
@@ -135,31 +196,31 @@ fun SocialLoginRow() {
     ) {
         // 소셜로그인 이미지 대신 해당 icon으로 대체
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
         )
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = 10.dp),
             tint = Gray100
@@ -174,7 +235,7 @@ fun SocialLoginRow() {
 }
 
 @Composable
-fun RegisterCompleteButton(viewModel: RegisterViewModel, context: Context) {
+fun RegisterCompleteButton(onClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom
@@ -186,28 +247,28 @@ fun RegisterCompleteButton(viewModel: RegisterViewModel, context: Context) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Gray100)
-                .clickable {
-                    Timber
-                        .tag("[회원가입]")
-                        .d("회원가입 버튼 클릭")
-                    if (viewModel.checkIsValidEmail() && viewModel.checkIsValidPassword()) {
-                        viewModel.apply {
-                            setLocalUserEmail()
-                            setLocalUserPassword()
-                        }
-                        (context as? Activity)?.finish()
-                    } else {
-                        viewModel.setEffect(
-                            RegisterContract.RegisterEffect.ShowToast(
-                                context.getString(
-                                    R.string.register_toast
-                                )
-                            )
-                        )
-                        context.apply { showToast(getString(R.string.register_toast)) }
-                    }
-                }
+                .clickable { onClick() }
                 .padding(vertical = 15.dp)
         )
     }
+}
+
+@Composable
+fun RegisterScreenPreview() {
+    RegisterScreen(
+        email = "jieun@ac.kr",
+        password = "password",
+        showPassword = false,
+        onEmailChange = {},
+        onPasswordChange = {},
+        onPasswordVisibilityChange = {},
+        onBackBtnClick = {},
+        onRegisterBtnClick = {},
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewRegisterScreen() {
+    RegisterScreenPreview()
 }

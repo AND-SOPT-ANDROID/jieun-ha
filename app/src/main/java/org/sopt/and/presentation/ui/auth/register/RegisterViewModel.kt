@@ -16,7 +16,9 @@ class RegisterViewModel @Inject constructor(
     }
 
     override fun handleEffect(effect: RegisterContract.RegisterEffect) {
-        TODO("toast 로직 옮기기")
+        when (effect) {
+            is RegisterContract.RegisterEffect.ShowToast -> {}
+        }
     }
 
     override suspend fun handleEvent(event: RegisterContract.RegisterEvent) {
@@ -36,25 +38,36 @@ class RegisterViewModel @Inject constructor(
                 Timber.tag("[회원가입]").d("showPassword 변경 : ${currentUiState.showPassword}")
 
             }
+
+            is RegisterContract.RegisterEvent.OnRegisterBtnClicked -> {
+                if (checkIsValidEmail() && checkIsValidPassword()) {
+                    setLocalUserEmail()
+                    setLocalUserPassword()
+                    setState(currentUiState.copy(registerStatus = RegisterContract.RegisterStatus.Success))
+                } else {
+                    setEffect(RegisterContract.RegisterEffect.ShowToast(message = event.message))
+                    setState(currentUiState.copy(registerStatus = RegisterContract.RegisterStatus.Fail))
+                }
+            }
         }
     }
 
-    fun checkIsValidEmail(): Boolean {
+    private fun checkIsValidEmail(): Boolean {
         Timber.tag("[회원가입]").d("Email 검사 ${currentUiState.email}")
         return currentUiState.email.matches(REGEX_EMAIL.toRegex())
     }
 
-    fun checkIsValidPassword(): Boolean {
+    private fun checkIsValidPassword(): Boolean {
         Timber.tag("[회원가입]").d("비밀번호 검사 ${currentUiState.password}")
         return currentUiState.password.matches(REGEX_PASSWORD.toRegex())
     }
 
-    fun setLocalUserEmail() {
+    private fun setLocalUserEmail() {
         localDataStorage.userEmail = currentUiState.email
         Timber.tag("[회원가입]").d("이메일 저장 : ${localDataStorage.userEmail}")
     }
 
-    fun setLocalUserPassword() {
+    private fun setLocalUserPassword() {
         localDataStorage.userPassword = currentUiState.password
         Timber.tag("[회원가입]").d("비밀번호 저장 : ${localDataStorage.userPassword}")
     }
