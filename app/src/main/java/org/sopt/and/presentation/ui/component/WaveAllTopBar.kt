@@ -1,6 +1,5 @@
 package org.sopt.and.presentation.ui.component
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,7 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,14 +20,15 @@ import org.sopt.and.R
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.GrayBlack
 import org.sopt.and.ui.theme.White
+import timber.log.Timber
 
 @Composable
 fun WaveAllTopBar(
-    modifier: Modifier = Modifier,
     title: String,
     position: Alignment,
     @DrawableRes icon: Int,
-    onIconClick: () -> Unit
+    onIconClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
@@ -45,13 +46,13 @@ fun WaveAllTopBar(
         )
 
         Icon(
-            painter = painterResource(id = icon),
+            imageVector = ImageVector.vectorResource(id = icon),
             contentDescription = null,
-            tint = White,
             modifier = Modifier
                 .align(position)
                 .padding(10.dp)
-                .clickable { onIconClick() }
+                .clickable { onIconClick() },
+            tint = White,
         )
     }
 }
@@ -64,7 +65,7 @@ fun WaveAllTopBarPreview() {
             title = "Wavve",
             position = Alignment.CenterStart,
             icon = R.drawable.ic_arrow_back_btn_24,
-            onIconClick = { Log.d("WaveAllTopBar", "icon clcked") }
+            onIconClick = { Timber.tag("WaveAllTopBar").d("icon clcked") }
         )
     }
 }

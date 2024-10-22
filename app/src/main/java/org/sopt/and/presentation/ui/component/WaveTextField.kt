@@ -22,10 +22,10 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun WaveTextField(
-    modifier: Modifier = Modifier,
     placeholder: String,
     value: String,
     onValueChange: (String) -> Unit = { _ -> },
+    modifier: Modifier = Modifier
 ) {
     TextField(
         value = value,

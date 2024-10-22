@@ -20,11 +20,11 @@ import timber.log.Timber
 
 @Composable
 fun ThreeTextWithVerticalDivider(
-    modifier: Modifier = Modifier,
     dividerLeftText: String,
     dividerCenterText: String,
     dividerRightText: String,
-    onDividerRightTextClick: () -> Unit
+    onDividerRightTextClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,

@@ -20,7 +20,8 @@ import timber.log.Timber
 fun WaveAllButton(
     buttonText: String,
     buttonColor: Color = BlueButton,
-    onClickButton: () -> Unit
+    onClickButton: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Button(
         modifier = Modifier

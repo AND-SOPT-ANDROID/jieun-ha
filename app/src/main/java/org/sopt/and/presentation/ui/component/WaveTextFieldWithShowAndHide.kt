@@ -27,9 +27,9 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun WaveTextFieldWithShowAndHide(
-    modifier: Modifier = Modifier,
     placeholder: String,
     value: String,
+    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = { _ -> },
     showPassword: Boolean = false,
     changePasswordVisibility: () -> Unit

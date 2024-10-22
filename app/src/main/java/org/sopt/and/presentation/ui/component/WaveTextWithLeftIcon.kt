@@ -9,7 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,8 +20,8 @@ import org.sopt.and.ui.theme.Gray100
 
 @Composable
 fun WaveTextWithLeftIcon(
+    description: String,
     modifier: Modifier = Modifier,
-    description: String
 ) {
     Row(
         modifier = modifier
@@ -29,11 +30,11 @@ fun WaveTextWithLeftIcon(
         horizontalArrangement = Arrangement.Start
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_support_24),
-            tint = Gray100,
+            imageVector = ImageVector.vectorResource(R.drawable.ic_support_24),
             contentDescription = null,
             modifier = Modifier
-                .size(16.dp)
+                .size(16.dp),
+            tint = Gray100,
         )
         Text(
             text = description,
