@@ -9,12 +9,18 @@ class RegisterContract {
         data class EmailChanged(val email: String) : RegisterEvent()
         data class PasswordChanged(val password: String) : RegisterEvent()
         data object PasswordVisibilityChanged : RegisterEvent()
+        data class OnRegisterBtnClicked(val message: String, val finishActivity: () -> Unit) : RegisterEvent()
+    }
+
+    enum class RegisterStatus {
+        Idle, Success, Fail
     }
 
     data class RegisterState(
         val email: String = "",
         val password: String = "",
-        val showPassword: Boolean = false
+        val showPassword: Boolean = false,
+        val registerStatus: RegisterStatus = RegisterStatus.Idle
     ) : UiState
 
     sealed class RegisterEffect : UiEffect {
