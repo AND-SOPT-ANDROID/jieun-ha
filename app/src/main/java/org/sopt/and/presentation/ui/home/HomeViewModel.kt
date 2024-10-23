@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor() :
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728613201561457273.webp"
     )
 
-    fun setCurrentBannerPage(page:Int) {
+    fun setCurrentBannerPage(page: Int) {
         setState(currentUiState.copy(currentBannerPage = page))
     }
 

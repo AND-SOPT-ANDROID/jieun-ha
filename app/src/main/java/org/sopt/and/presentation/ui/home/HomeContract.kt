@@ -21,7 +21,7 @@ class HomeContract {
         val homeStatus: HomeStatus = HomeStatus.Idle
     ) : UiState
 
-    sealed class HomeSideEffect: UiEffect {
+    sealed class HomeSideEffect : UiEffect {
 
     }
 }
