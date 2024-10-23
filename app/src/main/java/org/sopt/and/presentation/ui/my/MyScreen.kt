@@ -29,7 +29,8 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun MyScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    userName: String
 ) {
     Column(
         modifier = modifier
@@ -42,7 +43,7 @@ fun MyScreen(
                 .background(Gray300)
                 .padding(horizontal = 15.dp, vertical = 20.dp)
         ) {
-            MyProfile(userEmail = "@.com")
+            MyProfile(userEmail = userName)
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -180,6 +181,6 @@ fun MyListBox(title: String, description: String) {
 @Composable
 fun MyPreview() {
     ANDANDROIDTheme {
-        MyScreen()
+        MyScreen(userName = "jieundaeun@naver.com")
     }
 }
