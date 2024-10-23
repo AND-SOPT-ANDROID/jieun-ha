@@ -67,7 +67,11 @@ dependencies {
     // Hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation)
 
     // Timber
     implementation(libs.timber)
+
+    // Navigation
+    implementation(libs.androidx.navigation)
 }
