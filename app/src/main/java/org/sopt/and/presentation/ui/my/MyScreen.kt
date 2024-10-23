@@ -1,9 +1,5 @@
 package org.sopt.and.presentation.ui.my
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -11,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -30,22 +27,13 @@ import org.sopt.and.ui.theme.Gray300
 import org.sopt.and.ui.theme.GrayBlack
 import org.sopt.and.ui.theme.White
 
-class MyActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ANDANDROIDTheme {
-                MyScreen()
-            }
-        }
-    }
-}
-
 @Composable
-fun MyScreen() {
+fun MyScreen(
+    modifier: Modifier = Modifier,
+    userName: String
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(GrayBlack)
     ) {
@@ -53,21 +41,28 @@ fun MyScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Gray300)
+                .padding(horizontal = 15.dp, vertical = 20.dp)
         ) {
-            MyProfile(userEmail = "@.com")
+            MyProfile(userEmail = userName)
+
+            Spacer(modifier = Modifier.height(8.dp))
+
             MyPurchaseBox(information = stringResource(R.string.my_purchase_event))
+
+            Spacer(modifier = Modifier.height(8.dp))
+
             MyPurchaseBox(information = stringResource(R.string.my_purchase_ticket))
         }
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(GrayBlack)
         ) {
             MyListBox(
                 title = stringResource(R.string.my_view_history),
                 description = stringResource(R.string.my_view_history_none)
             )
+
             MyListBox(
                 title = stringResource(R.string.my_interest_program),
                 description = stringResource(R.string.my_interest_program_none)
@@ -80,8 +75,7 @@ fun MyScreen() {
 fun MyProfile(userEmail: String) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 15.dp, vertical = 20.dp),
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -90,13 +84,16 @@ fun MyProfile(userEmail: String) {
             tint = White,
             modifier = Modifier.size(44.dp)
         )
+
         Text(
             text = stringResource(R.string.my_nickname, userEmail),
             modifier = Modifier
                 .padding(start = 8.dp),
             color = White
         )
+
         Spacer(modifier = Modifier.weight(1f))
+
         Icon(
             painter = painterResource(R.drawable.ic_nofification_24),
             contentDescription = null,
@@ -105,6 +102,7 @@ fun MyProfile(userEmail: String) {
                 .clickable { }
                 .padding(8.dp)
         )
+
         Icon(
             painter = painterResource(R.drawable.ic_support_24),
             contentDescription = null,
@@ -121,13 +119,13 @@ fun MyPurchaseBox(information: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(15.dp)
     ) {
         Text(
             text = information,
             color = Gray100,
             fontSize = 16.sp
         )
+
         Row(
             modifier = Modifier
                 .clickable { }
@@ -137,6 +135,7 @@ fun MyPurchaseBox(information: String) {
                 color = White,
                 fontSize = 16.sp
             )
+
             Icon(
                 painter = painterResource(R.drawable.ic_arrow_right_btn_24),
                 contentDescription = null,
@@ -158,6 +157,7 @@ fun MyListBox(title: String, description: String) {
             fontSize = 20.sp,
             color = White
         )
+
         Icon(
             painter = painterResource(R.drawable.ic_block_44),
             contentDescription = null,
@@ -166,6 +166,7 @@ fun MyListBox(title: String, description: String) {
                 .padding(vertical = 30.dp),
             tint = Gray100
         )
+
         Text(
             text = description,
             fontSize = 16.sp,
@@ -180,6 +181,6 @@ fun MyListBox(title: String, description: String) {
 @Composable
 fun MyPreview() {
     ANDANDROIDTheme {
-        MyScreen()
+        MyScreen(userName = "jieundaeun@naver.com")
     }
 }
