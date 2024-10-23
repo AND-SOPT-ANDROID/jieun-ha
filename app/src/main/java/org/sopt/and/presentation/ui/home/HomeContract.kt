@@ -16,6 +16,7 @@ class HomeContract {
     data class HomeState(
         val bannerImgList: List<String> = listOf(),
         val currentBannerPage: Int = 0,
+        val editorRecommendedList: List<String> = listOf(),
         val homeStatus: HomeStatus = HomeStatus.Idle
     ) : UiState
 

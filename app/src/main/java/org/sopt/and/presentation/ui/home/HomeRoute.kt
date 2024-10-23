@@ -30,6 +30,7 @@ fun HomeRoute(
         numPages = homeState.bannerImgList.size.toString(),
         onCurrentPageChanged = { page ->
             homeViewModel.setCurrentBannerPage(page)
-        }
+        },
+        editorRecommendedImgList = homeState.editorRecommendedList
     )
 }
