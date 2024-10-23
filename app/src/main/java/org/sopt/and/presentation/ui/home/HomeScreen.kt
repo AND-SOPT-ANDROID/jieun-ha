@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -53,7 +54,8 @@ fun HomeScreen(
     bannerImgList: List<String>,
     numPages: String,
     onCurrentPageChanged: (Int) -> Unit,
-    editorRecommendedImgList: List<String>
+    editorRecommendedImgList: List<String>,
+    todayTopRankingImgList: List<String>
 ) {
     Column(
         modifier = modifier
@@ -81,6 +83,8 @@ fun HomeScreen(
             )
         }
 
+        Spacer(Modifier.height(24.dp))
+
         TextWithNavigateButton(
             titleRes = R.string.home_editor_recommend_title
         )
@@ -96,6 +100,26 @@ fun HomeScreen(
                 EditorRecommendedItem(recommendedItem = item)
             }
         }
+
+        Spacer(Modifier.height(24.dp))
+
+        TextWithNavigateButton(
+            titleRes = R.string.home_today_top_ranking_title
+        )
+
+        LazyRow (
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ){
+            itemsIndexed( todayTopRankingImgList,
+                key =  {index, _ -> index},
+                contentType = { _, item -> item}
+            ){ index, item ->
+                TodayTopRankingImgList(ranking = index, rankingItem = item)
+            }
+        }
+
+        Spacer(Modifier.height(12.dp))
     }
 }
 
@@ -172,6 +196,38 @@ fun EditorRecommendedItem(
     )
 }
 
+@Composable
+fun TodayTopRankingImgList(
+    ranking: Int,
+    rankingItem: String,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(rankingItem)
+                .crossfade(enable = true)
+                .build(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(15.dp))
+                .size(width = 180.dp, height = 240.dp)
+        )
+
+        Text(
+            text = (ranking + 1).toString(),
+            color = White,
+            fontSize = 42.sp,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
@@ -182,7 +238,8 @@ fun HomePreview() {
             bannerImgList = homeViewModel.mockBannerItem,
             numPages = "6",
             onCurrentPageChanged = { },
-            editorRecommendedImgList = homeViewModel.mockEditorRecommendedItem
+            editorRecommendedImgList = homeViewModel.mockEditorRecommendedItem,
+            todayTopRankingImgList = homeViewModel.mockTodayTopRankingItem
         )
     }
 }

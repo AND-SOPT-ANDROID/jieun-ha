@@ -31,6 +31,7 @@ fun HomeRoute(
         onCurrentPageChanged = { page ->
             homeViewModel.setCurrentBannerPage(page)
         },
-        editorRecommendedImgList = homeState.editorRecommendedList
+        editorRecommendedImgList = homeState.editorRecommendedList,
+        todayTopRankingImgList = homeState.todayTopRankingList
     )
 }

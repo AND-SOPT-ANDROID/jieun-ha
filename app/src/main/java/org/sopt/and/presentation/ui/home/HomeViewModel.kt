@@ -40,6 +40,19 @@ class HomeViewModel @Inject constructor() :
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/movieImg/MovieGroup/2023/GMV_CD01_WR0000011336-Vertical_LogoY_RTC.webp"
     )
 
+    val mockTodayTopRankingItem = listOf(
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202409/1726468463104944317.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202311/1698908212143109040.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202311/1701072276533128034.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202311/1699601586197251349.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728017508965610221.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202309/1694062313324743958.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728548592019625574.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202309/1694567844509388076.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202405/1715069627941981919.webp",
+        "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728613201561457273.webp"
+    )
+
     fun setCurrentBannerPage(page:Int) {
         setState(currentUiState.copy(currentBannerPage = page))
     }
@@ -47,6 +60,7 @@ class HomeViewModel @Inject constructor() :
     fun setHomeImgList() {
         setHomeBannerState()
         setEditorRecommendState()
+        setTodayTopRankingState()
 
         setState(currentUiState.copy(homeStatus = HomeContract.HomeStatus.Success))
     }
@@ -57,5 +71,9 @@ class HomeViewModel @Inject constructor() :
 
     private fun setEditorRecommendState() {
         setState(currentUiState.copy(editorRecommendedList = mockEditorRecommendedItem))
+    }
+
+    private fun setTodayTopRankingState() {
+        setState(currentUiState.copy(todayTopRankingList = mockTodayTopRankingItem))
     }
 }
