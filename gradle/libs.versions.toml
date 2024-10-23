@@ -15,6 +15,7 @@ viewmodel-compose = "2.8.6"
 kotlinx-coroutines = "1.8.1"
 navigation = "2.8.3"
 navigationHilt = "1.0.0"
+coilCompose = "3.0.0-rc01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +40,8 @@ androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-viewmodel
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation"}
 androidx-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "navigationHilt"}
+coil3-compose = {group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilCompose"}
+coil3-network = {group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilCompose"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
