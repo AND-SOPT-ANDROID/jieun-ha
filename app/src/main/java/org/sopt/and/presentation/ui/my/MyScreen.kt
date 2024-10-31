@@ -2,6 +2,7 @@ package org.sopt.and.presentation.ui.my
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,15 +42,12 @@ fun MyScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Gray300)
-                .padding(horizontal = 15.dp, vertical = 20.dp)
+                .padding(horizontal = 15.dp, vertical = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             MyProfile(userEmail = userName)
 
-            Spacer(modifier = Modifier.height(8.dp))
-
             MyPurchaseBox(information = stringResource(R.string.my_purchase_event))
-
-            Spacer(modifier = Modifier.height(8.dp))
 
             MyPurchaseBox(information = stringResource(R.string.my_purchase_ticket))
         }
