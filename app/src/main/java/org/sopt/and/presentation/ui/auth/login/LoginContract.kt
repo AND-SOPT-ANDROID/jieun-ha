@@ -9,7 +9,8 @@ class LoginContract {
         data class EmailChanged(val email: String) : LoginEvent()
         data class PasswordChanged(val password: String) : LoginEvent()
         data object PasswordVisibilityChanged : LoginEvent()
-        data class OnLoginBtnClicked(val successMessage: String, val failMessage: String) : LoginEvent()
+        data class OnLoginBtnClicked(val successMessage: String, val failMessage: String) :
+            LoginEvent()
     }
 
     enum class LoginStatus {
