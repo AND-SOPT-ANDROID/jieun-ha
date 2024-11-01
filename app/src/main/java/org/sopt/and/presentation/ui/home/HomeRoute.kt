@@ -8,13 +8,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun HomeRoute(
     paddingValues: PaddingValues,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    val homeState by homeViewModel.uiState.collectAsState()
+    val homeState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(homeState.homeStatus) {
         if (homeState.homeStatus == HomeContract.HomeStatus.Loading) {

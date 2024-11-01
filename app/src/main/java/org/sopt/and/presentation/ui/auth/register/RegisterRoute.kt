@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.and.R
 import org.sopt.and.util.showToast
 
@@ -18,7 +19,7 @@ fun RegisterRoute(
     navigateToLogin: () -> Unit,
     registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
-    val registerState by registerViewModel.uiState.collectAsState()
+    val registerState by registerViewModel.uiState.collectAsStateWithLifecycle()
     val registerEffect = registerViewModel.uiEffect
 
     val context = LocalContext.current
