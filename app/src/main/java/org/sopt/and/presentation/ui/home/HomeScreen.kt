@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
@@ -36,6 +38,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import org.sopt.and.R
 import org.sopt.and.presentation.ui.component.TextWithNavigateButton
+import org.sopt.and.presentation.ui.home.component.HomeAsyncImage
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
@@ -128,14 +131,8 @@ fun HomeBannerItem(
             .fillMaxWidth()
             .clip(RoundedCornerShape(15.dp))
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current)
-                .data(bannerImg)
-                .crossfade(enable = true)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
+        HomeAsyncImage(
+            imgUrl = bannerImg
         )
 
         HomeBannerItemCountText(
@@ -172,17 +169,14 @@ fun HomeBannerItemCountText(
 fun EditorRecommendedItem(
     recommendedItem: String
 ) {
-    AsyncImage(
-        model = ImageRequest.Builder(context = LocalContext.current)
-            .data(recommendedItem)
-            .crossfade(enable = true)
-            .build(),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
+    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp)/3
+
+    HomeAsyncImage(
+        imgUrl = recommendedItem,
         modifier = Modifier
-            .fillMaxWidth()
+            .width(imageWidth)
             .clip(RoundedCornerShape(15.dp))
-            .size(width = 144.dp, height = 192.dp)
+            .aspectRatio(3f/4f)
     )
 }
 
@@ -191,21 +185,18 @@ fun TodayTopRankingImgList(
     ranking: Int,
     rankingItem: String,
 ) {
+    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp)/2
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current)
-                .data(rankingItem)
-                .crossfade(enable = true)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
+        HomeAsyncImage(
+            imgUrl = rankingItem,
             modifier = Modifier
-                .fillMaxWidth()
+                .width(imageWidth)
                 .clip(RoundedCornerShape(15.dp))
-                .size(width = 180.dp, height = 240.dp)
+                .aspectRatio(3f/4f)
         )
 
         Text(

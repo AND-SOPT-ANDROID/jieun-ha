@@ -17,7 +17,7 @@ fun HomeRoute(
     val homeState by homeViewModel.uiState.collectAsState()
 
     LaunchedEffect(homeState.homeStatus) {
-        if (homeState.homeStatus == HomeContract.HomeStatus.Idle) {
+        if (homeState.homeStatus == HomeContract.HomeStatus.Loading) {
             homeViewModel.setHomeImgList()
         }
     }
