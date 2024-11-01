@@ -42,12 +42,12 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     bannerImgList: List<String>,
     numPages: String,
     onCurrentPageChanged: (Int) -> Unit,
     editorRecommendedImgList: List<String>,
-    todayTopRankingImgList: List<String>
+    todayTopRankingImgList: List<String>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier

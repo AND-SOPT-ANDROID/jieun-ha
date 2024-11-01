@@ -29,10 +29,10 @@ import org.sopt.and.ui.theme.White
 fun WaveTextFieldWithShowAndHide(
     placeholder: String,
     value: String,
-    modifier: Modifier = Modifier,
+    changePasswordVisibility: () -> Unit,
     onValueChange: (String) -> Unit = { _ -> },
     showPassword: Boolean = false,
-    changePasswordVisibility: () -> Unit
+    modifier: Modifier = Modifier
 ) {
     TextField(
         value = value,

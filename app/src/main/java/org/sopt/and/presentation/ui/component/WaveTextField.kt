@@ -24,8 +24,8 @@ import org.sopt.and.ui.theme.White
 fun WaveTextField(
     placeholder: String,
     value: String,
-    onValueChange: (String) -> Unit = { _ -> },
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit = { _ -> }
 ) {
     TextField(
         value = value,

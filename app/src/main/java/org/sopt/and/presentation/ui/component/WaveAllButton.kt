@@ -19,9 +19,9 @@ import timber.log.Timber
 @Composable
 fun WaveAllButton(
     buttonText: String,
-    buttonColor: Color = BlueButton,
     onClickButton: () -> Unit,
     modifier: Modifier = Modifier,
+    buttonColor: Color = BlueButton
 ) {
     Button(
         modifier = Modifier

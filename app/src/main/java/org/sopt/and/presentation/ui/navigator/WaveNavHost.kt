@@ -17,8 +17,8 @@ import org.sopt.and.presentation.ui.search.searchNavGraph
 @Composable
 fun WaveNavHost(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier,
     navigator: WaveNavigator,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier

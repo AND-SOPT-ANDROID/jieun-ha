@@ -15,8 +15,8 @@ import org.sopt.and.util.showToast
 
 @Composable
 fun RegisterRoute(
-    registerViewModel: RegisterViewModel = hiltViewModel(),
-    navigateToLogin: () -> Unit
+    navigateToLogin: () -> Unit,
+    registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
     val registerState by registerViewModel.uiState.collectAsState()
     val registerEffect = registerViewModel.uiEffect

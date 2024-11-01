@@ -18,9 +18,9 @@ import org.sopt.and.R
 @Composable
 fun LoginRoute(
     paddingValues: PaddingValues,
-    loginViewModel: LoginViewModel = hiltViewModel(),
     navigateToRegister: () -> Unit,
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    loginViewModel: LoginViewModel = hiltViewModel()
 ) {
     val loginState by loginViewModel.uiState.collectAsState()
     val loginEffect = loginViewModel.uiEffect
