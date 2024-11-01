@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -26,16 +26,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
-import coil3.request.ImageRequest
-import coil3.request.crossfade
 import org.sopt.and.R
 import org.sopt.and.presentation.ui.component.TextWithNavigateButton
 import org.sopt.and.presentation.ui.home.component.HomeAsyncImage
@@ -169,14 +165,14 @@ fun HomeBannerItemCountText(
 fun EditorRecommendedItem(
     recommendedItem: String
 ) {
-    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp)/3
+    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp) / 3
 
     HomeAsyncImage(
         imgUrl = recommendedItem,
         modifier = Modifier
             .width(imageWidth)
             .clip(RoundedCornerShape(15.dp))
-            .aspectRatio(3f/4f)
+            .aspectRatio(3f / 4f)
     )
 }
 
@@ -185,26 +181,28 @@ fun TodayTopRankingImgList(
     ranking: Int,
     rankingItem: String,
 ) {
-    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp)/2
+    val imageWidth = (LocalConfiguration.current.screenWidthDp.dp) / 2
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .padding(start = 10.dp, bottom = 28.dp)
     ) {
         HomeAsyncImage(
             imgUrl = rankingItem,
             modifier = Modifier
                 .width(imageWidth)
                 .clip(RoundedCornerShape(15.dp))
-                .aspectRatio(3f/4f)
+                .aspectRatio(3f / 4f)
         )
 
         Text(
             text = (ranking + 1).toString(),
             color = White,
             fontSize = 42.sp,
+            fontStyle = FontStyle.Italic,
             modifier = Modifier
                 .align(Alignment.BottomStart)
+                .offset(x = (-10).dp, y = 28.dp)
         )
     }
 }
