@@ -58,22 +58,13 @@ class HomeViewModel @Inject constructor() :
     }
 
     fun setHomeImgList() {
-        setHomeBannerState()
-        setEditorRecommendState()
-        setTodayTopRankingState()
-
-        setState(currentUiState.copy(homeStatus = HomeContract.HomeStatus.Success))
-    }
-
-    private fun setHomeBannerState() {
-        setState(currentUiState.copy(bannerImgList = mockBannerItem))
-    }
-
-    private fun setEditorRecommendState() {
-        setState(currentUiState.copy(editorRecommendedList = mockEditorRecommendedItem))
-    }
-
-    private fun setTodayTopRankingState() {
-        setState(currentUiState.copy(todayTopRankingList = mockTodayTopRankingItem))
+        setState(
+            currentUiState.copy(
+                homeStatus = HomeContract.HomeStatus.Success,
+                bannerImgList = mockBannerItem,
+                editorRecommendedList = mockEditorRecommendedItem,
+                todayTopRankingList = mockTodayTopRankingItem
+            )
+        )
     }
 }
