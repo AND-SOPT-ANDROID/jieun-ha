@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor() :
         TODO("Not yet implemented")
     }
 
-    val mockBannerItem = listOf(
+    private val mockBannerItem = listOf(
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202409/1726468505828994516.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202409/1727073001312600950.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728548543503727711.webp",
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor() :
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202409/1725362669902656119.webp"
     )
 
-    val mockEditorRecommendedItem = listOf(
+    private val mockEditorRecommendedItem = listOf(
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1729230112230270084.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202406/1717859400991205300.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/BMS/TVSeason/2023/K01_T2009-0520-2.webp",
@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor() :
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/movieImg/MovieGroup/2023/GMV_CD01_WR0000011336-Vertical_LogoY_RTC.webp"
     )
 
-    val mockTodayTopRankingItem = listOf(
+    private val mockTodayTopRankingItem = listOf(
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202409/1726468463104944317.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202311/1698908212143109040.webp",
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202311/1701072276533128034.webp",
