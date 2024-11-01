@@ -85,10 +85,10 @@ fun HomeScreen(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            itemsIndexed(editorRecommendedImgList,
-                key = { index, _ -> index },
-                contentType = { _, item -> item }
-            ) { index, item ->
+            itemsIndexed(
+                editorRecommendedImgList,
+                key = { index, _ -> index }
+            ) { _, item ->
                 EditorRecommendedItem(recommendedItem = item)
             }
         }
@@ -103,9 +103,9 @@ fun HomeScreen(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            itemsIndexed(todayTopRankingImgList,
-                key = { index, _ -> index },
-                contentType = { _, item -> item }
+            itemsIndexed(
+                todayTopRankingImgList,
+                key = { _, item -> item }
             ) { index, item ->
                 TodayTopRankingImgList(ranking = index, rankingItem = item)
             }
