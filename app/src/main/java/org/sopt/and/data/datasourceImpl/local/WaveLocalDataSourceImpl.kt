@@ -26,10 +26,15 @@ class WaveLocalDataSourceImpl @Inject constructor(
         get() = pref.getString(USER_PASSWORD, "") ?: ""
         set(value) = pref.edit { putString(USER_PASSWORD, value) }
 
+    override var accessToken: String
+        get() = pref.getString(ACCESS_TOKEN, "") ?: ""
+        set(value) = pref.edit { putString(ACCESS_TOKEN, value) }
+
     companion object {
         const val FILE_NAME = "AuthSharedPreferences"
         const val AUTO_LOGIN = "AutoLogin"
         const val USER_EMAIL = "UserEmail"
         const val USER_PASSWORD = "UserPassword"
+        const val ACCESS_TOKEN = "AccessToken"
     }
 }

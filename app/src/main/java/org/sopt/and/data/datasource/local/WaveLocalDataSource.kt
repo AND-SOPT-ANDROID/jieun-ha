@@ -4,4 +4,5 @@ interface WaveLocalDataSource {
     var isLogin: Boolean
     var userEmail: String
     var userPassword: String
+    var accessToken: String
 }
