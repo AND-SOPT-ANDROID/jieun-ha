@@ -4,24 +4,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun HomeRoute(
     paddingValues: PaddingValues,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    val homeState by homeViewModel.uiState.collectAsState()
+    val homeState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(homeState.homeStatus) {
-        if (homeState.homeStatus == HomeContract.HomeStatus.Idle) {
-            homeViewModel.setHomeImgList()
-        }
+    LaunchedEffect(Unit) {
+       homeViewModel.setHomeImgList()
     }
-
 
     HomeScreen(
         modifier = Modifier

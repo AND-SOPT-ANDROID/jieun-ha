@@ -30,12 +30,12 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun WaveBottomNavigation(
-    modifier: Modifier = Modifier,
-    isVisible: Boolean = false,
-    context: Context = LocalContext.current,
     bottomNaviItems: List<WaveBottomNavigationType>,
     currentBottomNaviItem: WaveBottomNavigationType?,
     onClickBottomNavItem: (WaveBottomNavigationType) -> Unit,
+    modifier: Modifier = Modifier,
+    isVisible: Boolean = false,
+    context: Context = LocalContext.current
 ) {
     AnimatedVisibility(visible = isVisible) {
         Row(

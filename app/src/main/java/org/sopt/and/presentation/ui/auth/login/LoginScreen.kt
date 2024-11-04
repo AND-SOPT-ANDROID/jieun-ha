@@ -33,7 +33,6 @@ import timber.log.Timber
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     email: String,
     password: String,
     showPassword: Boolean,
@@ -42,7 +41,8 @@ fun LoginScreen(
     onPasswordVisibilityChange: () -> Unit,
     onLoginBtnClick: () -> Unit,
     onNavigateToRegisterBtnClick: () -> Unit,
-    snackBarHostState: SnackbarHostState
+    snackBarHostState: SnackbarHostState,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier

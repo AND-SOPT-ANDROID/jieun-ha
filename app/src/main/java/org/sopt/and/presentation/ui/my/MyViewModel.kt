@@ -9,7 +9,5 @@ import javax.inject.Inject
 class MyViewModel @Inject constructor(
     private val localDataSource: WaveLocalDataSource
 ) : ViewModel() {
-    fun getLocalUserMail(): String {
-        return localDataSource.userEmail
-    }
+    fun getLocalUserMail(): String = localDataSource.userEmail
 }

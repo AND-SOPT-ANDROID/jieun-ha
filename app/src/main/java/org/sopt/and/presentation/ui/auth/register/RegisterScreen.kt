@@ -33,7 +33,6 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun RegisterScreen(
-    modifier: Modifier = Modifier,
     email: String,
     password: String,
     showPassword: Boolean,
@@ -42,6 +41,7 @@ fun RegisterScreen(
     onPasswordVisibilityChange: () -> Unit,
     onBackBtnClick: () -> Unit,
     onRegisterBtnClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
 
     Column(
