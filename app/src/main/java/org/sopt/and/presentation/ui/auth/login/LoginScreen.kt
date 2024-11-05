@@ -33,10 +33,10 @@ import timber.log.Timber
 
 @Composable
 fun LoginScreen(
-    email: String,
+    username: String,
     password: String,
     showPassword: Boolean,
-    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordVisibilityChange: () -> Unit,
     onLoginBtnClick: () -> Unit,
@@ -66,8 +66,8 @@ fun LoginScreen(
 
             WaveTextField(
                 placeholder = stringResource(R.string.login_id_hint),
-                value = email,
-                onValueChange = { onEmailChange(it) }
+                value = username,
+                onValueChange = { onUsernameChange(it) }
             )
 
             WaveTextFieldWithShowAndHide(
@@ -113,24 +113,19 @@ fun LoginScreen(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
     LoginScreen(
         modifier = Modifier.padding(15.dp),
-        email = "jieun@ac.kr",
+        username = "jieun@ac.kr",
         password = "password",
         showPassword = false,
-        onEmailChange = {},
+        onUsernameChange = {},
         onPasswordChange = {},
         onPasswordVisibilityChange = {},
         onNavigateToRegisterBtnClick = {},
         onLoginBtnClick = {},
         snackBarHostState = SnackbarHostState()
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen() {
-    LoginScreenPreview()
 }

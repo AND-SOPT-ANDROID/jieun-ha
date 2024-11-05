@@ -57,12 +57,12 @@ fun LoginRoute(
 
     LoginScreen(
         modifier = Modifier.padding(paddingValues),
-        email = loginState.email,
+        username = loginState.username,
         password = loginState.password,
         showPassword = loginState.showPassword,
-        onEmailChange = {
+        onUsernameChange = {
             loginViewModel.setEvent(
-                LoginContract.LoginEvent.EmailChanged(it)
+                LoginContract.LoginEvent.UsernameChanged(it)
             )
         },
         onPasswordChange = {
