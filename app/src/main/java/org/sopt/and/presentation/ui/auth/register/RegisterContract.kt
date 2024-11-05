@@ -6,8 +6,9 @@ import org.sopt.and.presentation.util.UiState
 
 class RegisterContract {
     sealed class RegisterEvent : UiEvent {
-        data class EmailChanged(val email: String) : RegisterEvent()
+        data class UsernameChanged(val username: String) : RegisterEvent()
         data class PasswordChanged(val password: String) : RegisterEvent()
+        data class HobbyChanged(val hobby: String): RegisterEvent()
         data object PasswordVisibilityChanged : RegisterEvent()
         data class OnRegisterBtnClicked(val message: String) : RegisterEvent()
     }
@@ -17,8 +18,9 @@ class RegisterContract {
     }
 
     data class RegisterState(
-        val email: String = "",
+        val username: String = "",
         val password: String = "",
+        val hobby: String = "",
         val showPassword: Boolean = false,
         val registerStatus: RegisterStatus = RegisterStatus.Idle
     ) : UiState
