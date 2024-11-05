@@ -36,7 +36,7 @@
     <string name="login_success">로그인 성공!</string>
     
     <!-- my -->
-    <string name="my_nickname">%s님</string>
+    <string name="my_hobby">취미: %s</string>
     <string name="my_purchase_event">첫 결제 시 첫 달 100원!</string>
     <string name="my_purchase">구매하기</string>
     <string name="my_purchase_ticket">현재 보유하신 이용권이 없습니다.</string>
