@@ -7,6 +7,7 @@ import org.sopt.and.data.model.response.ResponseLoginTokenDto
 import org.sopt.and.data.model.response.ResponseRegisterNumberDto
 import org.sopt.and.data.service.AuthService
 import org.sopt.and.presentation.util.BaseResponse
+import org.sopt.and.presentation.util.NullableBaseRespone
 import javax.inject.Inject
 
 class AuthRemoteDataSourceImpl @Inject constructor(
@@ -15,6 +16,6 @@ class AuthRemoteDataSourceImpl @Inject constructor(
     override suspend fun register(requestUserRegisterDto: RequestUserRegisterDto): BaseResponse<ResponseRegisterNumberDto> =
         authService.postRegister(requestUserRegisterDto)
 
-    override suspend fun login(requestUserLoginDto: RequestUserLoginDto): BaseResponse<ResponseLoginTokenDto> =
+    override suspend fun login(requestUserLoginDto: RequestUserLoginDto): NullableBaseRespone<ResponseLoginTokenDto> =
         authService.postLogin(requestUserLoginDto)
 }

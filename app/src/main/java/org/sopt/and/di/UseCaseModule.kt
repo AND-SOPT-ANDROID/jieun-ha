@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.and.domain.repository.AuthRepository
+import org.sopt.and.domain.usecase.PostUserLoginUseCase
 import org.sopt.and.domain.usecase.PostUserRegisterUseCase
 import javax.inject.Singleton
 
@@ -15,4 +16,9 @@ class UseCaseModule {
     @Singleton
     fun providesUserRegisterUseCase(authRepository: AuthRepository): PostUserRegisterUseCase =
         PostUserRegisterUseCase(authRepository = authRepository)
+
+    @Provides
+    @Singleton
+    fun providesUserLoginUseCase(authRepository: AuthRepository): PostUserLoginUseCase =
+        PostUserLoginUseCase(authRepository = authRepository)
 }

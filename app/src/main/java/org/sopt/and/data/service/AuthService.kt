@@ -5,6 +5,7 @@ import org.sopt.and.data.model.request.RequestUserRegisterDto
 import org.sopt.and.data.model.response.ResponseLoginTokenDto
 import org.sopt.and.data.model.response.ResponseRegisterNumberDto
 import org.sopt.and.presentation.util.BaseResponse
+import org.sopt.and.presentation.util.NullableBaseRespone
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -17,7 +18,7 @@ interface AuthService {
     @POST("/$LOGIN")
     suspend fun postLogin(
         @Body body: RequestUserLoginDto
-    ): BaseResponse<ResponseLoginTokenDto>
+    ): NullableBaseRespone<ResponseLoginTokenDto>
 
     companion object {
         const val USER = "user"
