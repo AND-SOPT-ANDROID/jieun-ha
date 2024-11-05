@@ -6,7 +6,7 @@ import org.sopt.and.presentation.util.UiState
 
 class LoginContract {
     sealed class LoginEvent : UiEvent {
-        data class EmailChanged(val email: String) : LoginEvent()
+        data class UsernameChanged(val username: String) : LoginEvent()
         data class PasswordChanged(val password: String) : LoginEvent()
         data object PasswordVisibilityChanged : LoginEvent()
         data class OnLoginBtnClicked(val successMessage: String, val failMessage: String) :
@@ -18,7 +18,7 @@ class LoginContract {
     }
 
     data class LoginState(
-        val email: String = "",
+        val username: String = "",
         val password: String = "",
         val showPassword: Boolean = false,
         val loginStatus: LoginStatus = LoginStatus.Idle
