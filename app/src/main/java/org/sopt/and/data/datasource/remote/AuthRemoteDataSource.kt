@@ -1,0 +1,13 @@
+package org.sopt.and.data.datasource.remote
+
+import org.sopt.and.data.model.request.RequestUserLoginDto
+import org.sopt.and.data.model.request.RequestUserRegisterDto
+import org.sopt.and.data.model.response.ResponseLoginTokenDto
+import org.sopt.and.data.model.response.ResponseRegisterNumberDto
+import org.sopt.and.presentation.util.BaseResponse
+
+interface AuthRemoteDataSource {
+    suspend fun register(requestUserRegisterDto: RequestUserRegisterDto): BaseResponse<ResponseRegisterNumberDto>
+
+    suspend fun login(requestUserLoginDto: RequestUserLoginDto): BaseResponse<ResponseLoginTokenDto>
+}
