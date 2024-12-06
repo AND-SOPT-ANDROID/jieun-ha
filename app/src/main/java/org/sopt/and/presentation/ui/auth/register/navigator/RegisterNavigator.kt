@@ -1,8 +1,9 @@
-package org.sopt.and.presentation.ui.auth.register
+package org.sopt.and.presentation.ui.auth.register.navigator
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import org.sopt.and.presentation.ui.auth.register.RegisterRoute
 
 fun NavController.registerNavigation() {
     navigate(

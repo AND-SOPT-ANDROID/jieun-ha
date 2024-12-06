@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
-import org.sopt.and.presentation.ui.auth.login.loginGraph
-import org.sopt.and.presentation.ui.auth.register.registerGraph
-import org.sopt.and.presentation.ui.home.homeNavGraph
-import org.sopt.and.presentation.ui.my.myNavGraph
-import org.sopt.and.presentation.ui.search.searchNavGraph
+import org.sopt.and.presentation.ui.auth.login.navigator.loginGraph
+import org.sopt.and.presentation.ui.auth.register.navigator.registerGraph
+import org.sopt.and.presentation.ui.home.navigator.homeNavGraph
+import org.sopt.and.presentation.ui.my.navigator.myNavGraph
+import org.sopt.and.presentation.ui.search.navigator.searchNavGraph
 
 @Composable
 fun WaveNavHost(
