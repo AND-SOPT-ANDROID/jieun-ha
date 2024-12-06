@@ -1,6 +1,6 @@
 package org.sopt.and.domain.model
 
-import org.sopt.and.data.model.request.RequestUserRegisterDto
+import org.sopt.and.data.dto.request.RequestUserRegisterDto
 
 data class UserRegisterEntity(
     val username: String,
