@@ -45,17 +45,23 @@ fun RegisterRoute(
     ) { innerPadding ->
         RegisterScreen(
             modifier = Modifier.padding(innerPadding),
-            email = registerState.email,
+            username = registerState.username,
             password = registerState.password,
+            hobby = registerState.hobby,
             showPassword = registerState.showPassword,
-            onEmailChange = {
+            onUsernameChange = {
                 registerViewModel.setEvent(
-                    RegisterContract.RegisterEvent.EmailChanged(it)
+                    RegisterContract.RegisterEvent.UsernameChanged(it)
                 )
             },
             onPasswordChange = {
                 registerViewModel.setEvent(
                     RegisterContract.RegisterEvent.PasswordChanged(it)
+                )
+            },
+            onHobbyChange = {
+                registerViewModel.setEvent(
+                    RegisterContract.RegisterEvent.HobbyChanged(it)
                 )
             },
             onPasswordVisibilityChange = {

@@ -33,10 +33,10 @@ import timber.log.Timber
 
 @Composable
 fun LoginScreen(
-    email: String,
+    username: String,
     password: String,
     showPassword: Boolean,
-    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordVisibilityChange: () -> Unit,
     onLoginBtnClick: () -> Unit,
@@ -66,16 +66,16 @@ fun LoginScreen(
 
             WaveTextField(
                 placeholder = stringResource(R.string.login_id_hint),
-                value = email,
-                onValueChange = { onEmailChange(it) }
+                value = username,
+                onValueChange = onUsernameChange
             )
 
             WaveTextFieldWithShowAndHide(
                 placeholder = stringResource(R.string.login_password_hint),
                 value = password,
-                onValueChange = { onPasswordChange(it) },
+                onValueChange = onPasswordChange,
                 showPassword = showPassword,
-                changePasswordVisibility = { onPasswordVisibilityChange() }
+                changePasswordVisibility = onPasswordVisibilityChange
             )
 
             Spacer(modifier = Modifier.height(25.dp))
@@ -91,7 +91,7 @@ fun LoginScreen(
                 dividerLeftText = stringResource(R.string.login_find_id),
                 dividerCenterText = stringResource(R.string.login_find_password),
                 dividerRightText = stringResource(R.string.register),
-                onDividerRightTextClick = { onNavigateToRegisterBtnClick() }
+                onDividerRightTextClick = onNavigateToRegisterBtnClick
             )
 
             TextWithHorizontalDivider(
@@ -113,24 +113,19 @@ fun LoginScreen(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
     LoginScreen(
         modifier = Modifier.padding(15.dp),
-        email = "jieun@ac.kr",
+        username = "jieun@ac.kr",
         password = "password",
         showPassword = false,
-        onEmailChange = {},
+        onUsernameChange = {},
         onPasswordChange = {},
         onPasswordVisibilityChange = {},
         onNavigateToRegisterBtnClick = {},
         onLoginBtnClick = {},
         snackBarHostState = SnackbarHostState()
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen() {
-    LoginScreenPreview()
 }

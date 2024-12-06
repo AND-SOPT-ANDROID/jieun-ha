@@ -3,16 +3,26 @@ package org.sopt.and.presentation.ui.my
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.sopt.and.presentation.ui.my.state.MyUiState
 
 @Composable
 fun MyRoute(
     paddingValues: PaddingValues,
     myViewModel: MyViewModel = hiltViewModel()
 ) {
-    MyScreen(
-        modifier = Modifier.padding(paddingValues),
-        userName = myViewModel.getLocalUserMail()
-    )
+    val uiState by myViewModel.myUiState.collectAsStateWithLifecycle()
+
+    when(val myUiState: MyUiState = uiState) {
+        is MyUiState.Success -> {
+            MyScreen(
+                modifier = Modifier.padding(paddingValues),
+                userHobby = myUiState.hobby
+            )
+        }
+        else -> Unit
+    }
 }

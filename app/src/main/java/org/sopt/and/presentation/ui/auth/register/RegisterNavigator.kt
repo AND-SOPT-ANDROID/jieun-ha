@@ -15,9 +15,7 @@ fun NavGraphBuilder.registerGraph(
 ) {
     composable(route = RegisterRoute.REGISTER_ROUTE) {
         RegisterRoute(
-            navigateToLogin = {
-                navigateToLogin()
-            }
+            navigateToLogin = navigateToLogin
         )
     }
 }

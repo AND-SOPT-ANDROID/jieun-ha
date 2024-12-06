@@ -29,7 +29,7 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun MyScreen(
-    userName: String,
+    userHobby: String,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -44,7 +44,7 @@ fun MyScreen(
                 .padding(horizontal = 15.dp, vertical = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            MyProfile(userEmail = userName)
+            MyProfile(userHobby = userHobby)
 
             MyPurchaseBox(information = stringResource(R.string.my_purchase_event))
 
@@ -69,7 +69,7 @@ fun MyScreen(
 }
 
 @Composable
-fun MyProfile(userEmail: String) {
+fun MyProfile(userHobby: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -83,7 +83,7 @@ fun MyProfile(userEmail: String) {
         )
 
         Text(
-            text = stringResource(R.string.my_nickname, userEmail),
+            text = stringResource(R.string.my_hobby, userHobby),
             modifier = Modifier
                 .padding(start = 8.dp),
             color = White
@@ -178,6 +178,6 @@ fun MyListBox(title: String, description: String) {
 @Composable
 fun MyPreview() {
     ANDANDROIDTheme {
-        MyScreen(userName = "jieundaeun@naver.com")
+        MyScreen(userHobby = "swim")
     }
 }

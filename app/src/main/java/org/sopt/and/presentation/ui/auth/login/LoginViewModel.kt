@@ -2,12 +2,16 @@ package org.sopt.and.presentation.ui.auth.login
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.and.data.datasource.local.WaveLocalDataSource
-import org.sopt.and.presentation.util.BaseViewModel
+import org.sopt.and.domain.model.UserLoginEntity
+import org.sopt.and.domain.usecase.PatchUserLoginUseCase
+import org.sopt.and.util.base.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val localDataSource: WaveLocalDataSource
+    private val waveLocalDataStorage: WaveLocalDataSource,
+    private val patchUserLoginUseCase: PatchUserLoginUseCase
 ) : BaseViewModel<LoginContract.LoginEvent, LoginContract.LoginState, LoginContract.LoginEffect>() {
 
     override fun createInitialState(): LoginContract.LoginState {
@@ -20,8 +24,8 @@ class LoginViewModel @Inject constructor(
 
     override suspend fun handleEvent(event: LoginContract.LoginEvent) {
         when (event) {
-            is LoginContract.LoginEvent.EmailChanged -> {
-                setState(currentUiState.copy(email = event.email))
+            is LoginContract.LoginEvent.UsernameChanged -> {
+                setState(currentUiState.copy(username = event.username))
             }
 
             is LoginContract.LoginEvent.PasswordChanged -> {
@@ -33,10 +37,18 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginContract.LoginEvent.OnLoginBtnClicked -> {
-                if (checkIsUserEmail() && checkIsUserPassword()) {
+                patchUserLoginUseCase(
+                    userLoginEntity = UserLoginEntity(
+                        username = currentUiState.username,
+                        userPassword = currentUiState.password
+                    )
+                ).onSuccess { user ->
+                    Timber.d("[로그인] 성공 -> $user")
                     setEffect(LoginContract.LoginEffect.ShowSuccessSnackBar(successMessage = event.successMessage))
+                    setAccessToken(user.accessToken)
                     setState(currentUiState.copy(loginStatus = LoginContract.LoginStatus.Success))
-                } else {
+                }.onFailure {
+                    Timber.d("[로그인] 실패 -> $it")
                     setEffect(LoginContract.LoginEffect.ShowFailSnackBar(failMessage = event.failMessage))
                     setState(currentUiState.copy(loginStatus = LoginContract.LoginStatus.Fail))
                 }
@@ -44,8 +56,10 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun checkIsUserEmail(): Boolean = (currentUiState.email == localDataSource.userEmail)
-
-    private fun checkIsUserPassword(): Boolean =
-        (currentUiState.password == localDataSource.userPassword)
+    private fun setAccessToken(token: String) {
+        with(waveLocalDataStorage) {
+            accessToken = token
+            isLogin = true
+        }
+    }
 }

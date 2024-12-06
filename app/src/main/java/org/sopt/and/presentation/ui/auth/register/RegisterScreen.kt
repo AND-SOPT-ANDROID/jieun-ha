@@ -33,11 +33,13 @@ import org.sopt.and.ui.theme.White
 
 @Composable
 fun RegisterScreen(
-    email: String,
+    username: String,
     password: String,
+    hobby: String,
     showPassword: Boolean,
-    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onHobbyChange: (String) -> Unit,
     onPasswordVisibilityChange: () -> Unit,
     onBackBtnClick: () -> Unit,
     onRegisterBtnClick: () -> Unit,
@@ -55,7 +57,7 @@ fun RegisterScreen(
             title = stringResource(R.string.register),
             position = Alignment.CenterEnd,
             icon = R.drawable.ic_close_btn_24,
-            onIconClick = { onBackBtnClick() }
+            onIconClick = onBackBtnClick
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -69,22 +71,30 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         WaveTextField(
-            placeholder = stringResource(R.string.register_email_hint),
-            value = email,
-            onValueChange = { onEmailChange(it) }
+            placeholder = stringResource(R.string.register_username_hint),
+            value = username,
+            onValueChange = onUsernameChange
         )
 
-        TextWithStartIcon(stringResource(R.string.register_email_information))
+        TextWithStartIcon(stringResource(R.string.register_username_information))
 
         WaveTextFieldWithShowAndHide(
-            placeholder = stringResource(R.string.register_password),
+            placeholder = stringResource(R.string.register_password_hint),
             value = password,
-            onValueChange = { onPasswordChange(it) },
+            onValueChange = onPasswordChange,
             showPassword = showPassword,
-            changePasswordVisibility = { onPasswordVisibilityChange() }
+            changePasswordVisibility = onPasswordVisibilityChange
         )
 
         TextWithStartIcon(stringResource(R.string.register_password_information))
+
+        WaveTextField(
+            placeholder = stringResource(R.string.register_hobby_hint),
+            value = hobby,
+            onValueChange = onHobbyChange
+        )
+
+        TextWithStartIcon(stringResource(R.string.register_hobby_information))
 
         TextWithHorizontalDivider(
             modifier = Modifier.height(70.dp),
@@ -94,7 +104,7 @@ fun RegisterScreen(
         SocialLoginRow()
     }
 
-    RegisterCompleteButton(onClick = { onRegisterBtnClick() }, modifier = modifier)
+    RegisterCompleteButton(onClick = onRegisterBtnClick, modifier = modifier)
 }
 
 @Composable
@@ -188,22 +198,19 @@ fun RegisterCompleteButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun RegisterScreenPreview() {
     RegisterScreen(
-        email = "jieun@ac.kr",
+        username = "jieun",
         password = "password",
+        hobby = "swim",
         showPassword = false,
-        onEmailChange = {},
+        onUsernameChange = {},
         onPasswordChange = {},
+        onHobbyChange = {},
         onPasswordVisibilityChange = {},
         onBackBtnClick = {},
         onRegisterBtnClick = {},
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewRegisterScreen() {
-    RegisterScreenPreview()
 }
