@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.and.R
-import org.sopt.and.presentation.ui.component.TextWithNavigateButton
+import org.sopt.and.presentation.ui.home.component.TextWithNavigateButton
 import org.sopt.and.presentation.ui.home.component.HomeAsyncImage
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100

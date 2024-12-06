@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.ui.component
+package org.sopt.and.presentation.ui.home.component
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement

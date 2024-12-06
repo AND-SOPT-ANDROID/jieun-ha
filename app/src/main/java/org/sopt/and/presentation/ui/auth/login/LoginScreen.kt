@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import org.sopt.and.R
 import org.sopt.and.presentation.ui.auth.register.SocialLoginRow
 import org.sopt.and.presentation.ui.component.TextWithHorizontalDivider
-import org.sopt.and.presentation.ui.component.ThreeTextWithVerticalDivider
-import org.sopt.and.presentation.ui.component.WaveAllButton
+import org.sopt.and.presentation.ui.auth.login.component.ThreeTextWithVerticalDivider
+import org.sopt.and.presentation.ui.auth.login.component.WaveLoginButton
 import org.sopt.and.presentation.ui.component.WaveAllTopBar
 import org.sopt.and.presentation.ui.component.WaveTextField
 import org.sopt.and.presentation.ui.component.WaveTextFieldWithShowAndHide
@@ -80,7 +80,7 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(25.dp))
 
-            WaveAllButton(
+            WaveLoginButton(
                 buttonText = stringResource(R.string.login_button),
                 onClickButton = { onLoginBtnClick() }
             )
