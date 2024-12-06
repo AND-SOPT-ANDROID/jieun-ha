@@ -1,8 +1,8 @@
 package org.sopt.and.presentation.ui.auth.login
 
-import org.sopt.and.presentation.util.UiEffect
-import org.sopt.and.presentation.util.UiEvent
-import org.sopt.and.presentation.util.UiState
+import org.sopt.and.util.base.UiEffect
+import org.sopt.and.util.base.UiEvent
+import org.sopt.and.util.base.UiState
 
 class LoginContract {
     sealed class LoginEvent : UiEvent {

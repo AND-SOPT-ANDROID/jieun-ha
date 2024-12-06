@@ -57,7 +57,7 @@ fun RegisterScreen(
             title = stringResource(R.string.register),
             position = Alignment.CenterEnd,
             icon = R.drawable.ic_close_btn_24,
-            onIconClick = { onBackBtnClick() }
+            onIconClick = onBackBtnClick
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -73,7 +73,7 @@ fun RegisterScreen(
         WaveTextField(
             placeholder = stringResource(R.string.register_username_hint),
             value = username,
-            onValueChange = { onUsernameChange(it) }
+            onValueChange = onUsernameChange
         )
 
         TextWithStartIcon(stringResource(R.string.register_username_information))
@@ -81,9 +81,9 @@ fun RegisterScreen(
         WaveTextFieldWithShowAndHide(
             placeholder = stringResource(R.string.register_password_hint),
             value = password,
-            onValueChange = { onPasswordChange(it) },
+            onValueChange = onPasswordChange,
             showPassword = showPassword,
-            changePasswordVisibility = { onPasswordVisibilityChange() }
+            changePasswordVisibility = onPasswordVisibilityChange
         )
 
         TextWithStartIcon(stringResource(R.string.register_password_information))
@@ -91,7 +91,7 @@ fun RegisterScreen(
         WaveTextField(
             placeholder = stringResource(R.string.register_hobby_hint),
             value = hobby,
-            onValueChange = { onHobbyChange(it) }
+            onValueChange = onHobbyChange
         )
 
         TextWithStartIcon(stringResource(R.string.register_hobby_information))
@@ -104,7 +104,7 @@ fun RegisterScreen(
         SocialLoginRow()
     }
 
-    RegisterCompleteButton(onClick = { onRegisterBtnClick() }, modifier = modifier)
+    RegisterCompleteButton(onClick = onRegisterBtnClick, modifier = modifier)
 }
 
 @Composable

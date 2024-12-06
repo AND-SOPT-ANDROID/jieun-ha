@@ -2,14 +2,14 @@ package org.sopt.and.presentation.ui.auth.register
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.and.domain.model.UserRegisterEntity
-import org.sopt.and.domain.usecase.PostUserRegisterUseCase
-import org.sopt.and.presentation.util.BaseViewModel
+import org.sopt.and.domain.usecase.PatchUserRegisterUseCase
+import org.sopt.and.util.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val postUserRegisterUseCase: PostUserRegisterUseCase
+    private val patchUserRegisterUseCase: PatchUserRegisterUseCase
 ) :
     BaseViewModel<RegisterContract.RegisterEvent, RegisterContract.RegisterState, RegisterContract.RegisterEffect>() {
 
@@ -47,7 +47,7 @@ class RegisterViewModel @Inject constructor(
 
             is RegisterContract.RegisterEvent.OnRegisterBtnClicked -> {
                 if (checkIsValidUsername() && checkIsValidPassword() && checkIsValidHobby()) {
-                    postUserRegisterUseCase(
+                    patchUserRegisterUseCase(
                         userRegisterEntity = UserRegisterEntity(
                             username = currentUiState.username,
                             userPassword = currentUiState.password,

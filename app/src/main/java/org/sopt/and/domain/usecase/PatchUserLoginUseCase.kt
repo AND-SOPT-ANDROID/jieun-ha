@@ -4,7 +4,7 @@ import org.sopt.and.domain.model.UserEntity
 import org.sopt.and.domain.model.UserLoginEntity
 import org.sopt.and.domain.repository.AuthRepository
 
-class PostUserLoginUseCase(
+class PatchUserLoginUseCase(
     private val authRepository: AuthRepository
 ) {
     suspend operator fun invoke(userLoginEntity: UserLoginEntity): Result<UserEntity> =

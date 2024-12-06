@@ -6,8 +6,8 @@ import org.sopt.and.data.model.request.RequestUserRegisterDto
 import org.sopt.and.data.model.response.ResponseLoginTokenDto
 import org.sopt.and.data.model.response.ResponseRegisterNumberDto
 import org.sopt.and.data.service.AuthService
-import org.sopt.and.presentation.util.BaseResponse
-import org.sopt.and.presentation.util.NullableBaseRespone
+import org.sopt.and.util.base.BaseResponse
+import org.sopt.and.util.base.NullableBaseRespone
 import javax.inject.Inject
 
 class AuthRemoteDataSourceImpl @Inject constructor(

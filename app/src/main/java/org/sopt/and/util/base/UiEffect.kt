@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.util
+package org.sopt.and.util.base
 
 /* SideEffect를 의미
 * Composable 함수가 재구성될 때 상태 변화를 감지하고 부수적인 작업을 실행

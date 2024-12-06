@@ -1,7 +1,7 @@
 package org.sopt.and.presentation.ui.home
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.sopt.and.presentation.util.BaseViewModel
+import org.sopt.and.util.base.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel

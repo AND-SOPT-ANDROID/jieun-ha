@@ -56,7 +56,6 @@ object RetrofitModule {
     @Auth
     fun provideAuthInterceptor(interceptor: AuthInterceptor): Interceptor = interceptor
 
-    @ExperimentalSerializationApi
     @Provides
     @Wave
     @Singleton

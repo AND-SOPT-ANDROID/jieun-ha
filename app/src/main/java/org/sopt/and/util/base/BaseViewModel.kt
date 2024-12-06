@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.util
+package org.sopt.and.util.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

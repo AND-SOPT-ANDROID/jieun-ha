@@ -3,9 +3,9 @@ package org.sopt.and.domain.usecase
 import org.sopt.and.domain.model.UserHobbyEntity
 import org.sopt.and.domain.repository.MyRepository
 
-class GetUserHobbyUseCase(
+class PatchUserHobbyUseCase(
     private val myRepository: MyRepository
 ) {
-    suspend operator fun invoke(): Result<UserHobbyEntity> =
+    suspend operator fun invoke(): UserHobbyEntity =
         myRepository.getMyHobby()
 }

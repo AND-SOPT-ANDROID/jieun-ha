@@ -3,15 +3,15 @@ package org.sopt.and.presentation.ui.auth.login
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.and.data.datasource.local.WaveLocalDataSource
 import org.sopt.and.domain.model.UserLoginEntity
-import org.sopt.and.domain.usecase.PostUserLoginUseCase
-import org.sopt.and.presentation.util.BaseViewModel
+import org.sopt.and.domain.usecase.PatchUserLoginUseCase
+import org.sopt.and.util.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val waveLocalDataStorage: WaveLocalDataSource,
-    private val postUserLoginUseCase: PostUserLoginUseCase
+    private val patchUserLoginUseCase: PatchUserLoginUseCase
 ) : BaseViewModel<LoginContract.LoginEvent, LoginContract.LoginState, LoginContract.LoginEffect>() {
 
     override fun createInitialState(): LoginContract.LoginState {
@@ -37,7 +37,7 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginContract.LoginEvent.OnLoginBtnClicked -> {
-                postUserLoginUseCase(
+                patchUserLoginUseCase(
                     userLoginEntity = UserLoginEntity(
                         username = currentUiState.username,
                         userPassword = currentUiState.password

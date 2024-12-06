@@ -8,8 +8,6 @@ import javax.inject.Inject
 class MyRepositoryImpl @Inject constructor(
     private val myRemoteDataSource: MyRemoteDataSource
 ) : MyRepository {
-    override suspend fun getMyHobby(): Result<UserHobbyEntity> =
-        runCatching {
-            myRemoteDataSource.getMyHobby().result.toUserHobbyEntity()
-        }
+    override suspend fun getMyHobby(): UserHobbyEntity =
+        myRemoteDataSource.getMyHobby().result.toUserHobbyEntity()
 }

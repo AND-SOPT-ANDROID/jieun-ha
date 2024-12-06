@@ -67,15 +67,15 @@ fun LoginScreen(
             WaveTextField(
                 placeholder = stringResource(R.string.login_id_hint),
                 value = username,
-                onValueChange = { onUsernameChange(it) }
+                onValueChange = onUsernameChange
             )
 
             WaveTextFieldWithShowAndHide(
                 placeholder = stringResource(R.string.login_password_hint),
                 value = password,
-                onValueChange = { onPasswordChange(it) },
+                onValueChange = onPasswordChange,
                 showPassword = showPassword,
-                changePasswordVisibility = { onPasswordVisibilityChange() }
+                changePasswordVisibility = onPasswordVisibilityChange
             )
 
             Spacer(modifier = Modifier.height(25.dp))
@@ -91,7 +91,7 @@ fun LoginScreen(
                 dividerLeftText = stringResource(R.string.login_find_id),
                 dividerCenterText = stringResource(R.string.login_find_password),
                 dividerRightText = stringResource(R.string.register),
-                onDividerRightTextClick = { onNavigateToRegisterBtnClick() }
+                onDividerRightTextClick = onNavigateToRegisterBtnClick
             )
 
             TextWithHorizontalDivider(
