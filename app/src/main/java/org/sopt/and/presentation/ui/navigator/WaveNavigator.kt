@@ -11,12 +11,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import org.sopt.and.presentation.model.WaveBottomNavigationRoute
 import org.sopt.and.presentation.type.WaveBottomNavigationType
-import org.sopt.and.presentation.ui.auth.login.LoginRoute
-import org.sopt.and.presentation.ui.auth.login.loginNavigation
-import org.sopt.and.presentation.ui.auth.register.registerNavigation
-import org.sopt.and.presentation.ui.home.homeNavigation
-import org.sopt.and.presentation.ui.my.myNavigation
-import org.sopt.and.presentation.ui.search.searchNavigation
+import org.sopt.and.presentation.ui.auth.login.navigator.LoginRoute
+import org.sopt.and.presentation.ui.auth.login.navigator.loginNavigation
+import org.sopt.and.presentation.ui.auth.register.navigator.registerNavigation
+import org.sopt.and.presentation.ui.home.navigator.homeNavigation
+import org.sopt.and.presentation.ui.my.navigator.myNavigation
+import org.sopt.and.presentation.ui.search.navigator.searchNavigation
 
 class WaveNavigator(
     val navHostController: NavHostController

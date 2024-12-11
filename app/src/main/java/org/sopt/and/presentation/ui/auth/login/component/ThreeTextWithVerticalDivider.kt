@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.ui.component
+package org.sopt.and.presentation.ui.auth.login.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

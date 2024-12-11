@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.ui.component
+package org.sopt.and.presentation.ui.auth.login.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,14 +17,14 @@ import org.sopt.and.ui.theme.White
 import timber.log.Timber
 
 @Composable
-fun WaveAllButton(
+fun WaveLoginButton(
     buttonText: String,
     onClickButton: () -> Unit,
     modifier: Modifier = Modifier,
     buttonColor: Color = BlueButton
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         contentPadding = PaddingValues(horizontal = 40.dp, vertical = 15.dp),
         onClick = { onClickButton() },
@@ -43,7 +43,7 @@ fun WaveAllButton(
 @Composable
 fun WaveAllButtonPreview() {
     ANDANDROIDTheme {
-        WaveAllButton(
+        WaveLoginButton(
             buttonText = "로그인하기",
             buttonColor = BlueButton,
             onClickButton = { Timber.tag("버튼 컴포넌트").d("클릭") }

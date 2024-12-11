@@ -1,9 +1,10 @@
-package org.sopt.and.presentation.ui.auth.login
+package org.sopt.and.presentation.ui.auth.login.navigator
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import org.sopt.and.presentation.ui.auth.login.LoginRoute
 
 fun NavController.loginNavigation() {
     navigate(

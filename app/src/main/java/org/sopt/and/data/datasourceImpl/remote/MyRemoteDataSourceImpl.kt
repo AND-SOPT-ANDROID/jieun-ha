@@ -1,7 +1,7 @@
 package org.sopt.and.data.datasourceImpl.remote
 
 import org.sopt.and.data.datasource.remote.MyRemoteDataSource
-import org.sopt.and.data.model.response.ResponseHobbyDto
+import org.sopt.and.data.dto.response.ResponseHobbyDto
 import org.sopt.and.data.service.MyService
 import org.sopt.and.util.base.NullableBaseRespone
 import javax.inject.Inject
