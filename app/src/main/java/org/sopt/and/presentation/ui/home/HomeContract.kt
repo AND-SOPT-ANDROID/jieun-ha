@@ -12,8 +12,7 @@ class HomeContract {
 
     data class HomeState(
         val homeInitialState: HomeUiState = HomeUiState.Idle,
-        val currentBannerPage: Int = 0,
-        val pagerState: PagerState = PagerState(pageCount = { currentBannerPage })
+        val pagerState: PagerState = PagerState(pageCount = { 0 })
     ) : UiState
 
     sealed class HomeUiState {
