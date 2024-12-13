@@ -6,7 +6,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -17,25 +16,28 @@ fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by homeViewModel.uiState.collectAsStateWithLifecycle()
-    val pagerState = rememberPagerState(pageCount = { homeState.bannerImgList.size })
+    val homeUiState: HomeContract.HomeUiState = homeState.homeInitialState
 
-    LaunchedEffect(Unit) {
-       homeViewModel.setHomeImgList()
-    }
-
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.collect { page ->
-            homeViewModel.setCurrentBannerPage(page)
+    LaunchedEffect(homeUiState) {
+        if(homeState.homeInitialState == HomeContract.HomeUiState.Idle) {
+            homeViewModel.setHomeImgList()
         }
     }
 
-    HomeScreen(
-        modifier = Modifier
-            .padding(paddingValues),
-        bannerImgList = homeState.bannerImgList,
-        numPages = homeState.bannerImgList.size.toString(),
-        pagerState = pagerState,
-        editorRecommendedImgList = homeState.editorRecommendedList,
-        todayTopRankingImgList = homeState.todayTopRankingList
-    )
+    when (homeUiState) {
+        is HomeContract.HomeUiState.Success -> {
+            val pagerState = rememberPagerState(pageCount = { homeUiState.bannerImgList.size })
+
+            HomeScreen(
+                modifier = Modifier
+                    .padding(paddingValues),
+                bannerImgList = homeUiState.bannerImgList,
+                pagerState = pagerState,
+                editorRecommendedImgList = homeUiState.editorRecommendedList,
+                todayTopRankingImgList = homeUiState.todayTopRankingList
+            )
+        }
+
+        else -> Unit
+    }
 }

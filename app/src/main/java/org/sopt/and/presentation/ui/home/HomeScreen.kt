@@ -43,7 +43,6 @@ import org.sopt.and.ui.theme.White
 @Composable
 fun HomeScreen(
     bannerImgList: List<String>,
-    numPages: String,
     editorRecommendedImgList: List<String>,
     todayTopRankingImgList: List<String>,
     modifier: Modifier = Modifier,
@@ -65,7 +64,7 @@ fun HomeScreen(
             HomeBannerItem(
                 bannerImg = bannerImgList[page],
                 currentPage = (page + 1).toString(),
-                numPages = numPages
+                numPages = pagerState.pageCount.toString()
             )
         }
 
@@ -207,9 +206,8 @@ fun HomePreview() {
     ANDANDROIDTheme {
         HomeScreen(
             bannerImgList = listOf(""),
-            numPages = "6",
             editorRecommendedImgList = listOf(""),
-            todayTopRankingImgList = listOf("")
+            todayTopRankingImgList = listOf(""),
         )
     }
 }

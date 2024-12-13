@@ -1,6 +1,6 @@
 package org.sopt.and.presentation.ui.home
 
-import okhttp3.internal.immutableListOf
+import androidx.compose.foundation.pager.PagerState
 import org.sopt.and.util.base.UiEffect
 import org.sopt.and.util.base.UiEvent
 import org.sopt.and.util.base.UiState
@@ -10,17 +10,25 @@ class HomeContract {
 
     }
 
-    enum class HomeStatus {
-        Loading, Success, Fail
-    }
-
     data class HomeState(
-        val bannerImgList: List<String> = immutableListOf(),
+        val homeInitialState: HomeUiState = HomeUiState.Idle,
         val currentBannerPage: Int = 0,
-        val editorRecommendedList: List<String> = immutableListOf(),
-        val todayTopRankingList: List<String> = immutableListOf(),
-        val homeStatus: HomeStatus = HomeStatus.Loading
+        val pagerState: PagerState = PagerState(pageCount = { currentBannerPage })
     ) : UiState
+
+    sealed class HomeUiState {
+        data class Success(
+            val bannerImgList: List<String>,
+            val editorRecommendedList: List<String>,
+            val todayTopRankingList: List<String>
+        ) : HomeUiState()
+
+        data object Loading : HomeUiState()
+
+        data class Error(val message: String? = null) : HomeUiState()
+
+        data object Idle : HomeUiState()
+    }
 
     sealed class HomeSideEffect : UiEffect {
 
