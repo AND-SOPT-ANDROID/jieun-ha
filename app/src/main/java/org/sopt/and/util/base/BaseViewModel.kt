@@ -29,16 +29,18 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
         subscribeToEvents()
     }
 
-    protected fun setState(state: State) {
-        _uiState.value = state
+    protected fun setState(reduce: State.() -> State) {
+        val newState = currentUiState.reduce()
+        _uiState.value = newState
     }
 
     fun setEvent(event: Event) {
         viewModelScope.launch { _uiEvent.emit(event) }
     }
 
-    fun setEffect(effect: Effect) {
-        viewModelScope.launch { _uiEffect.send(effect) }
+    fun setEffect(builder: () -> Effect) {
+        val effectValue = builder()
+        viewModelScope.launch { _uiEffect.send(effectValue) }
     }
 
     private fun subscribeToEvents() {

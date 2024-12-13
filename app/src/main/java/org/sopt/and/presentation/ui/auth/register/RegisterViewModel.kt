@@ -26,22 +26,22 @@ class RegisterViewModel @Inject constructor(
     override suspend fun handleEvent(event: RegisterContract.RegisterEvent) {
         when (event) {
             is RegisterContract.RegisterEvent.UsernameChanged -> {
-                setState(currentUiState.copy(username = event.username))
+                setState { copy(username = event.username) }
                 Timber.tag("[회원가입]").d("이름 변경 :${event.username}")
             }
 
             is RegisterContract.RegisterEvent.PasswordChanged -> {
-                setState(currentUiState.copy(password = event.password))
+                setState { copy(password = event.password) }
                 Timber.tag("[회원가입]").d("비밀번호 변경 : ${event.password}")
             }
 
             is RegisterContract.RegisterEvent.HobbyChanged -> {
-                setState(currentUiState.copy(hobby = event.hobby))
+                setState { copy(hobby = event.hobby) }
                 Timber.tag("[회원가입]").d("취미 변경 : ${event.hobby}")
             }
 
             is RegisterContract.RegisterEvent.PasswordVisibilityChanged -> {
-                setState(currentUiState.copy(showPassword = !currentUiState.showPassword))
+                setState { copy(showPassword = !currentUiState.showPassword) }
                 Timber.tag("[회원가입]").d("showPassword 변경 : ${currentUiState.showPassword}")
             }
 
@@ -54,10 +54,10 @@ class RegisterViewModel @Inject constructor(
                             userHobby = currentUiState.hobby
                         )
                     )
-                    setState(currentUiState.copy(registerStatus = RegisterContract.RegisterStatus.Success))
+                    setState { copy(registerStatus = RegisterContract.RegisterStatus.Success) }
                 } else {
-                    setEffect(RegisterContract.RegisterEffect.ShowToast(message = event.message))
-                    setState(currentUiState.copy(registerStatus = RegisterContract.RegisterStatus.Fail))
+                    setEffect { RegisterContract.RegisterEffect.ShowToast(message = event.message) }
+                    setState { copy(registerStatus = RegisterContract.RegisterStatus.Fail) }
                 }
             }
         }
