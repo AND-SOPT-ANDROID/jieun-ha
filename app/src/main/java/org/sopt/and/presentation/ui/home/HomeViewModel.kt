@@ -13,11 +13,11 @@ class HomeViewModel @Inject constructor() :
     }
 
     override fun handleEffect(effect: HomeContract.HomeSideEffect) {
-        TODO("Not yet implemented")
+        // TODO
     }
 
     override suspend fun handleEvent(event: HomeContract.HomeEvent) {
-        TODO("Not yet implemented")
+        // TODO
     }
 
     private val mockBannerItem = listOf(
@@ -53,18 +53,15 @@ class HomeViewModel @Inject constructor() :
         "https://image.wavve.com/v1/thumbnails/480_720_20_80/meta/image/202410/1728613201561457273.webp"
     )
 
-    fun setCurrentBannerPage(page: Int) {
-        setState(currentUiState.copy(currentBannerPage = page))
-    }
-
     fun setHomeImgList() {
-        setState(
-            currentUiState.copy(
-                homeStatus = HomeContract.HomeStatus.Success,
-                bannerImgList = mockBannerItem,
-                editorRecommendedList = mockEditorRecommendedItem,
-                todayTopRankingList = mockTodayTopRankingItem
+        setState {
+            copy(
+                homeInitialState = HomeContract.HomeUiState.Success(
+                    bannerImgList = mockBannerItem,
+                    editorRecommendedList = mockEditorRecommendedItem,
+                    todayTopRankingList = mockTodayTopRankingItem
+                )
             )
-        )
+        }
     }
 }

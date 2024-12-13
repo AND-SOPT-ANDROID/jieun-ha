@@ -2,6 +2,7 @@ package org.sopt.and.presentation.ui.home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,20 +16,28 @@ fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by homeViewModel.uiState.collectAsStateWithLifecycle()
+    val homeUiState: HomeContract.HomeUiState = homeState.homeInitialState
 
-    LaunchedEffect(Unit) {
-       homeViewModel.setHomeImgList()
+    LaunchedEffect(homeUiState) {
+        if(homeState.homeInitialState == HomeContract.HomeUiState.Idle) {
+            homeViewModel.setHomeImgList()
+        }
     }
 
-    HomeScreen(
-        modifier = Modifier
-            .padding(paddingValues),
-        bannerImgList = homeState.bannerImgList,
-        numPages = homeState.bannerImgList.size.toString(),
-        onCurrentPageChanged = { page ->
-            homeViewModel.setCurrentBannerPage(page)
-        },
-        editorRecommendedImgList = homeState.editorRecommendedList,
-        todayTopRankingImgList = homeState.todayTopRankingList
-    )
+    when (homeUiState) {
+        is HomeContract.HomeUiState.Success -> {
+            val pagerState = rememberPagerState(pageCount = { homeUiState.bannerImgList.size })
+
+            HomeScreen(
+                modifier = Modifier
+                    .padding(paddingValues),
+                bannerImgList = homeUiState.bannerImgList,
+                pagerState = pagerState,
+                editorRecommendedImgList = homeUiState.editorRecommendedList,
+                todayTopRankingImgList = homeUiState.todayTopRankingList
+            )
+        }
+
+        else -> Unit
+    }
 }

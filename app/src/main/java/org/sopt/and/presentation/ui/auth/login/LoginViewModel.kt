@@ -19,21 +19,21 @@ class LoginViewModel @Inject constructor(
     }
 
     override fun handleEffect(effect: LoginContract.LoginEffect) {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
     override suspend fun handleEvent(event: LoginContract.LoginEvent) {
         when (event) {
             is LoginContract.LoginEvent.UsernameChanged -> {
-                setState(currentUiState.copy(username = event.username))
+                setState{ copy(username = event.username) }
             }
 
             is LoginContract.LoginEvent.PasswordChanged -> {
-                setState(currentUiState.copy(password = event.password))
+                setState{ copy(password = event.password) }
             }
 
             is LoginContract.LoginEvent.PasswordVisibilityChanged -> {
-                setState(currentUiState.copy(showPassword = !currentUiState.showPassword))
+                setState{ copy(showPassword = !currentUiState.showPassword) }
             }
 
             is LoginContract.LoginEvent.OnLoginBtnClicked -> {
@@ -44,13 +44,13 @@ class LoginViewModel @Inject constructor(
                     )
                 ).onSuccess { user ->
                     Timber.d("[로그인] 성공 -> $user")
-                    setEffect(LoginContract.LoginEffect.ShowSuccessSnackBar(successMessage = event.successMessage))
+                    setEffect{ LoginContract.LoginEffect.ShowSuccessSnackBar(successMessage = event.successMessage) }
                     setAccessToken(user.accessToken)
-                    setState(currentUiState.copy(loginStatus = LoginContract.LoginStatus.Success))
+                    setState{ copy(loginStatus = LoginContract.LoginStatus.Success) }
                 }.onFailure {
                     Timber.d("[로그인] 실패 -> $it")
-                    setEffect(LoginContract.LoginEffect.ShowFailSnackBar(failMessage = event.failMessage))
-                    setState(currentUiState.copy(loginStatus = LoginContract.LoginStatus.Fail))
+                    setEffect{LoginContract.LoginEffect.ShowFailSnackBar(failMessage = event.failMessage)}
+                    setState{ copy(loginStatus = LoginContract.LoginStatus.Fail) }
                 }
             }
         }

@@ -16,13 +16,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.and.R
-import org.sopt.and.presentation.ui.home.component.TextWithNavigateButton
 import org.sopt.and.presentation.ui.home.component.HomeAsyncImage
+import org.sopt.and.presentation.ui.home.component.TextWithNavigateButton
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Gray100
 import org.sopt.and.ui.theme.GrayBlack
@@ -43,11 +43,10 @@ import org.sopt.and.ui.theme.White
 @Composable
 fun HomeScreen(
     bannerImgList: List<String>,
-    numPages: String,
-    onCurrentPageChanged: (Int) -> Unit,
     editorRecommendedImgList: List<String>,
     todayTopRankingImgList: List<String>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    pagerState: PagerState = rememberPagerState(pageCount = { 0 }),
 ) {
     Column(
         modifier = modifier
@@ -55,14 +54,8 @@ fun HomeScreen(
             .background(GrayBlack)
             .verticalScroll(rememberScrollState())
     ) {
-        val pagerState = rememberPagerState(pageCount = { bannerImgList.size })
         val horizontalContentPadding =
             ((LocalConfiguration.current).screenWidthDp * (1F - 0.85F) / 2).dp
-
-        // TODO PagerState 자체를 인자로 받고 아래 LaunchedEffect를 HomeRoute로 옮기기
-        LaunchedEffect(pagerState.currentPage) {
-            onCurrentPageChanged(pagerState.currentPage)
-        }
 
         HorizontalPager(
             state = pagerState,
@@ -71,7 +64,7 @@ fun HomeScreen(
             HomeBannerItem(
                 bannerImg = bannerImgList[page],
                 currentPage = (page + 1).toString(),
-                numPages = numPages
+                numPages = pagerState.pageCount.toString()
             )
         }
 
@@ -213,10 +206,8 @@ fun HomePreview() {
     ANDANDROIDTheme {
         HomeScreen(
             bannerImgList = listOf(""),
-            numPages = "6",
-            onCurrentPageChanged = { },
             editorRecommendedImgList = listOf(""),
-            todayTopRankingImgList = listOf("")
+            todayTopRankingImgList = listOf(""),
         )
     }
 }
